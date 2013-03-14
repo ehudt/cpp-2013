@@ -7,16 +7,16 @@ class memPage_t {
 		memPage_t(); // Default CTOR
 		memPage_t(const int capacity); // CTOR with specific capacity
 		~memPage_t();
-		const int setPosition(const int newPos); // Set the current position. Returns the new position or -1 on error
-		const int getPosition() const; // Get the current position
-		const bool isEmpty() const; 
-		const bool isFull() const;
-		const int getSize() const;
-		const int getCapacity() const;
-		const int read(void* const dst, const int sizeToRead, const int offset) const; // returns the number of bytes read or -1 on error
-		const int read(void* const dst, const int sizeToRead) const; // returns the number of bytes read or -1 on error
-		const int write(const void* const src, const int sizeToWrite); // returns the number of bytes written or -1 on error
-		const int write(const void* const src, const int sizeToWrite, const int offset); // returns the number of bytes written or -1 on error
+		int setPosition(const int newPos); // Set the current position. Returns the new position or -1 on error
+		int getPosition() const; // Get the current position
+		bool isEmpty() const; 
+		bool isFull() const;
+		int getSize() const;
+		int getCapacity() const;
+		int read(void* const dst, const int sizeToRead, const int offset) const; // returns the number of bytes read or -1 on error
+		int read(void* const dst, const int sizeToRead) const; // returns the number of bytes read or -1 on error
+		int write(const void* const src, const int sizeToWrite); // returns the number of bytes written or -1 on error
+		int write(const void* const src, const int sizeToWrite, const int offset); // returns the number of bytes written or -1 on error
 		void setNext(const memPage_t* const next);
 		const memPage_t* getNext() const;
 
