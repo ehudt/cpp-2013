@@ -13,7 +13,7 @@ memPage_t::memPage_t():
 	buffer(new char[newPageSize]) {}
 
 memPage_t::~memPage_t() { 
-	delete[] &buffer;
+	delete[] buffer;
 }
 
 int memPage_t::setPosition(int newPos){
@@ -38,7 +38,7 @@ int memPage_t::getSize() const {
 	return size;
 }
 
-int memPage_t::getCapacity() const {
+const int memPage_t::getCapacity() const {
 	return capacity;
 }
 
