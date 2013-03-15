@@ -98,6 +98,6 @@ int memPage_t::setNewPageSize(int newSize){
 	return newPageSize;
 }
 
-int memPage_t::getNewPageSize() const {
+int memPage_t::getNewPageSize() {
 	return newPageSize;
 }
