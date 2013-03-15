@@ -22,7 +22,7 @@ int main(){
 	char* s2 = new char[sizeof(s1)+1];
 
 	assert(p1.write(s1, sizeof(s1),4) == sizeof(s1));
-	assert(p1.getPosition() == 3);
+	assert(p1.getPosition() == 26);
 	assert(p1.setPosition(4) == 4);
 	assert(p1.read(s2, sizeof(s1)) == sizeof(s1));
 	while (p1.write(s1,sizeof(s1)) > 0) { continue; }
