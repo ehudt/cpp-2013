@@ -1,11 +1,12 @@
 #include "memPool_t.h"
+#include <string.h>
 #define min(a,b) ((a)<(b)?(a):(b))
 #define max(a,b) ((a)>(b)?(a):(b))
 
 memPool_t::memPool_t() :
 	pageCount(1),
 	size(0),
-	capacity(memPage_t::newPageSize),
+	capacity(memPage_t::getNewPageSize()),
 	position(0),
 	firstPage(new memPage_t),
 	currentPage(firstPage)
@@ -14,7 +15,7 @@ memPool_t::memPool_t() :
 memPool_t::memPool_t(int initPageCount) :
 	pageCount(initPageCount),
 	size(0),
-	capacity(initPageCount * memPage_t::newPageSize),
+	capacity(initPageCount * memPage_t::getNewPageSize()),
 	position(0),
 	firstPage(new memPage_t),
 	currentPage(firstPage)
@@ -70,27 +71,28 @@ int memPool_t::getPageCount() const {
 	return pageCount;
 }
 
-int memPool_t::getNewPageSize() const {
+int memPool_t::getNewPageSize() {
 	return memPage_t::getNewPageSize();
 }
 
-int memPool_t::setNewPageSize(int newSize) const {
+int memPool_t::setNewPageSize(int newSize) {
 	return memPage_t::setNewPageSize(newSize);
 }
 
 int memPool_t::read(void * dst, int sizeToRead) {
 	if (!dst || sizeToRead < 0) return -1;
 	int actual = min(sizeToRead, size - position);
+	int bytesLeft = actual;
 
-	while (actual > 0) { // invariant: if currentPage == NULL then actual == 0
+	while (bytesLeft > 0) { // invariant: if currentPage == NULL then bytesLeft == 0
 		if (currentPage->getPosition() == currentPage->getCapacity()) {
 			currentPage = currentPage->getNext();
 			if (!currentPage) break;
 			currentPage->setPosition(0);
 		}
-		int bytesRead = currentPage->read(dst, actual);
-		actual -= bytesRead;
-		dst += bytesRead;
+		int bytesRead = currentPage->read(dst, bytesLeft);
+		bytesLeft -= bytesRead;
+		dst = (char *)dst + bytesRead;
 		position += bytesRead;
 	}
 	return actual;
@@ -124,14 +126,14 @@ int memPool_t::write(const void * src, int sizeToWrite) {
 		}
 		int bytesWritten = currentPage->write(src, bytesLeft);
 		bytesLeft -= bytesWritten;
-		src += bytesWritten;
+		src = (char *)src + bytesWritten;
 		position += bytesWritten;
 	}
 	size = max(size, position);
 	return sizeToWrite;
 }
 
-int write(const void * src, int sizeToWrite, int offset) {
+int memPool_t::write(const void * src, int sizeToWrite, int offset) {
 	int prevPos = position;
 	if (setPosition(offset) < 0) return -1;
 	int bytesWritten = write(src, sizeToWrite);

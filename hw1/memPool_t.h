@@ -11,7 +11,7 @@ class memPool_t {
 		int getSize() const;
 		int getCapacity() const;
 		int getPageCount() const;
-		static int getNewPageSize() const;
+		static int getNewPageSize();
 		static int setNewPageSize(int newSize);
 		int read(void * dst, int sizeToRead); // returns the number of bytes read or -1 on error
 		int read(void * dst, int sizeToRead, int offset);

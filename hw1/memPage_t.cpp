@@ -67,8 +67,8 @@ int memPage_t::write(const void* const src, int sizeToWrite){
 	int actual;
 	actual = min(sizeToWrite, capacity-position);
 	memcpy(buffer + position, src, actual);
+	size = max(size, position + actual);
 	setPosition(position + actual);
-	size = max(size, position);
 	
 	return actual;
 }
@@ -88,7 +88,7 @@ void memPage_t::setNext(memPage_t* const newNext){
 	next = newNext;
 }
 
-const memPage_t* memPage_t::getNext() const{
+memPage_t* memPage_t::getNext() const{
 	return next;
 }
 
