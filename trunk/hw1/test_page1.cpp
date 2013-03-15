@@ -35,7 +35,7 @@ int main(){
 	assert(p2.isEmpty());
 	assert(p2.write(s1, sizeof(s1)) == 20);
 	assert(p2.getSize()==p2.getPosition());
-
+	delete[] s2;
 
 // Add set/get next tests and read/write extremes
 }

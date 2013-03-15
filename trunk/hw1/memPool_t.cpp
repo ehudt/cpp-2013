@@ -128,6 +128,7 @@ int memPool_t::write(const void * src, int sizeToWrite) {
 		position += bytesWritten;
 	}
 	size = max(size, position);
+	return sizeToWrite;
 }
 
 int write(const void * src, int sizeToWrite, int offset) {
