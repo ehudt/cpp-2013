@@ -20,5 +20,6 @@ int main(){
 	assert(mp2.write("ehud", 5) == 5);
 	assert(mp2.setPosition(0) == 0);
 	assert(mp2.read(s2, 200) == 5);
+	delete mp1;
 	return 0;
 }
