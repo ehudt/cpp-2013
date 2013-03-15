@@ -11,7 +11,7 @@ class memPage_t {
 		bool isEmpty() const; 
 		bool isFull() const;
 		int getSize() const;
-		int getCapacity() const;
+		const int getCapacity() const;
 		int read(void* const dst, int sizeToRead, int offset); // returns the number of bytes read or -1 on error
 		int read(void* const dst, int sizeToRead); // returns the number of bytes read or -1 on error
 		int write(const void* const src, int sizeToWrite); // returns the number of bytes written or -1 on error
@@ -25,7 +25,7 @@ class memPage_t {
 		const memPage_t& operator= (const memPage_t& mp);
 		static int newPageSize;
 		int size;	// Actual size of the memPage
-		int capacity;	// memPage capacity	
+		const int capacity;	// memPage capacity	
 		int position; // Current position
 		char* const buffer;
 		memPage_t* next; // Pointer to the next page
