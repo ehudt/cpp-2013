@@ -41,7 +41,7 @@ int memPage_t::getCapacity() const {
 	return capacity;
 }
 
-int memPage_t::read(void* const dst, int sizeToRead) const{
+int memPage_t::read(void* const dst, int sizeToRead) {
 	if (!dst || sizeToRead < 0) return -1;
 	int actual;
 	actual = min(sizeToRead, size-position);
@@ -50,7 +50,7 @@ int memPage_t::read(void* const dst, int sizeToRead) const{
 	return actual;
 }
 
-int memPage_t::read(void* const dst, int sizeToRead, int offset) const {
+int memPage_t::read(void* const dst, int sizeToRead, int offset) {
 	int prevPos = position;
 	if (setPosition(offset) < 0) return -1;
 	int bytesRead;
@@ -81,15 +81,15 @@ int memPage_t::write(const void* const src, int sizeToWrite, int offset){
 	return bytesWritten;
 }
 
-void memPage_t::setNext(const memPage_t* const next){
-	this.next = next;
+void memPage_t::setNext(memPage_t* const newNext){
+	next = newNext;
 }
 
-const memPage_t* memPage_t::getNext(){
+const memPage_t* memPage_t::getNext() const{
 	return next;
 }
 
-static int memPage_t::setNewPageSize(int newSize){
+int memPage_t::setNewPageSize(int newSize){
 	if (newSize <= 0) return -1;
 	newPageSize = newSize;
 	return newPageSize;
