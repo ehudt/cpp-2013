@@ -1,6 +1,7 @@
 #include "memPage_t.h"
 #include <string.h>
 #define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
 
 int memPage_t::newPageSize = 1024;
 
@@ -66,6 +67,7 @@ int memPage_t::write(const void* const src, int sizeToWrite){
 	int actual;
 	actual = min(sizeToWrite, capacity-position);
 	memcpy(buffer + position, src, actual);
+	size = max(size, position+actual);
 	setPosition(position + actual);
 	return actual;
 }
