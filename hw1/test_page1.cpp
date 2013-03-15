@@ -18,7 +18,7 @@ int main(){
 	assert(p1.setPosition(3) == 3);
 	assert(p1.getPosition() == 3);
 
-	char[] s1 = "arbelzingerhagevgever";
+	char s1[] = "arbelzingerhagevgever";
 	char* s2 = new char[sizeof(s1)+1];
 
 	assert(p1.write(s1, sizeof(s1),4) == sizeof(s1));
