@@ -12,11 +12,11 @@ class memPage_t {
 		bool isFull() const;
 		int getSize() const;
 		int getCapacity() const;
-		int read(void* const dst, int sizeToRead, int offset) const; // returns the number of bytes read or -1 on error
-		int read(void* const dst, int sizeToRead) const; // returns the number of bytes read or -1 on error
+		int read(void* const dst, int sizeToRead, int offset); // returns the number of bytes read or -1 on error
+		int read(void* const dst, int sizeToRead); // returns the number of bytes read or -1 on error
 		int write(const void* const src, int sizeToWrite); // returns the number of bytes written or -1 on error
 		int write(const void* const src, int sizeToWrite, int offset); // returns the number of bytes written or -1 on error
-		void setNext(const memPage_t* const next);
+		void setNext(memPage_t* const next);
 		const memPage_t* getNext() const;
 		static int setNewPageSize(int newSize); // Static method to change the default size for new pages
 
