@@ -19,6 +19,7 @@ class memPage_t {
 		void setNext(memPage_t* const next);
 		const memPage_t* getNext() const;
 		static int setNewPageSize(int newSize); // Static method to change the default size for new pages
+		static int getNewPageSize() const;
 
 	private: //data members
 		memPage_t(const memPage_t& memPage); // Copying memPage_t is not allowed
