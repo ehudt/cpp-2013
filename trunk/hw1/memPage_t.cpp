@@ -1,7 +1,7 @@
 #include "memPage_t.h"
 #include <string.h>
 
-memPage_t::newPageSize = 1024;
+int memPage_t::newPageSize = 1024;
 
 memPage_t::memPage_t():
 	size(0),
