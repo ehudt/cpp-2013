@@ -8,7 +8,7 @@ memPage_t::memPage_t():
 	capacity(newPageSize),
 	position(0),
 	next(NULL),
-	buffer(*(new char[newPageSize])) {}
+	buffer(new char[newPageSize]) {}
 
 memPage_t::~memPage_t() { 
 	delete[] &buffer;
