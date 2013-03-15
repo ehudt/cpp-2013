@@ -1,5 +1,6 @@
 #include "memPage_t.h"
 #include <string.h>
+#define min(a,b) ((a)<(b)?(a):(b))
 
 int memPage_t::newPageSize = 1024;
 
@@ -20,27 +21,27 @@ int memPage_t::setPosition(int newPos){
 	return position;
 }
 
-int memPage_t::getPosition(){
+int memPage_t::getPosition() const {
 	return position;
 }
 
-bool memPage_t::isEmpty(){
+bool memPage_t::isEmpty() const {
 	return (size==0);
 }
 
-bool memPage_t::isFull(){
+bool memPage_t::isFull() const {
 	return (size==capacity);
 }
 
-int memPage_t::getSize(){
+int memPage_t::getSize() const {
 	return size;
 }
 
-int memPage_t::getCapacity(){
+int memPage_t::getCapacity() const {
 	return capacity;
 }
 
-int memPage_t::read(void* const dst, int sizeToRead){
+int memPage_t::read(void* const dst, int sizeToRead) const{
 	if (!dst || sizeToRead < 0) return -1;
 	int actual;
 	actual = min(sizeToRead, size-position);
@@ -49,7 +50,7 @@ int memPage_t::read(void* const dst, int sizeToRead){
 	return actual;
 }
 
-int memPage_t::read(void* const dst, int sizeToRead, int offset){
+int memPage_t::read(void* const dst, int sizeToRead, int offset) const {
 	int prevPos = position;
 	if (setPosition(offset) < 0) return -1;
 	int bytesRead;
