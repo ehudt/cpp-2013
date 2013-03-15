@@ -27,7 +27,7 @@ class memPage_t {
 		int size;	// Actual size of the memPage
 		int capacity;	// memPage capacity	
 		int position; // Current position
-		char*& buffer;
+		char* const buffer;
 		memPage_t* next; // Pointer to the next page
 };
 
