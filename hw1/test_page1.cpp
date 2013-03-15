@@ -29,5 +29,13 @@ int main(){
 	assert(p1.isFull());
 	assert(p1.getCapacity() == p1.getSize());
 
+	memPage_t::setNewPageSize(20);
+	memPage_t p2;
+	assert(p2.getCapacity() == 20);
+	assert(p2.isEmpty());
+	assert(p2.write(s1, sizeof(s1)) == 20);
+	assert(p2.getSize()==p2.getPosition());
+
+
 // Add set/get next tests and read/write extremes
 }
