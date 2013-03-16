@@ -11,12 +11,12 @@ class memPool_t {
 		int getSize() const;
 		int getCapacity() const;
 		int getPageCount() const;
-		static int getNewPageSize();
-		static int setNewPageSize(int newSize);
+		static int getNewPageSize(); // Get the size for newly-created pages
+		static int setNewPageSize(int newSize); // Set the size for newly-created pages
 		int read(void * dst, int sizeToRead); // returns the number of bytes read or -1 on error
-		int read(void * dst, int sizeToRead, int offset);
+		int read(void * dst, int sizeToRead, int offset); // returns the number of bytes read or -1 on error
 		int write(const void * src, int sizeToWrite); // returns the number of bytes written or -1 on error
-		int write(const void * src, int sizeToWrite, int offset);
+		int write(const void * src, int sizeToWrite, int offset); // returns the number of bytes written or -1 on error
 
 	private: //data members
 		memPool_t(const memPool_t& memPool); // Copying memPool_t is not allowed
@@ -25,6 +25,6 @@ class memPool_t {
 		int size;	// Actual size of the memPool
 		int capacity;	// memPool capacity
 		int position;	// current position
-		memPage_t* firstPage;
-		memPage_t* currentPage;
+		memPage_t& firstPage; // First page of the pool (all pages are in a linked list)
+		memPage_t* currentPage; // The page where the current position is.
 };
