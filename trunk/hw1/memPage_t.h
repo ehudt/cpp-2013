@@ -1,8 +1,4 @@
 class memPage_t {
-
-	//TODO: assignment operator? 
-	// We need to make it private (ehud)
-	
 	public: // member functions
 		memPage_t(); // Default CTOR
 		~memPage_t();
