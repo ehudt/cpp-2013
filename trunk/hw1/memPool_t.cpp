@@ -8,8 +8,8 @@ memPool_t::memPool_t() :
 	size(0),
 	capacity(memPage_t::getNewPageSize()),
 	position(0),
-	firstPage(new memPage_t),
-	currentPage(firstPage)
+	firstPage(*(new memPage_t)),
+	currentPage(&firstPage)
 {}
 
 memPool_t::memPool_t(int initPageCount) :
@@ -17,10 +17,10 @@ memPool_t::memPool_t(int initPageCount) :
 	size(0),
 	capacity(initPageCount * memPage_t::getNewPageSize()),
 	position(0),
-	firstPage(new memPage_t),
-	currentPage(firstPage)
+	firstPage(*(new memPage_t)),
+	currentPage(&firstPage)
 {
-	memPage_t* page = firstPage;
+	memPage_t* page = &firstPage;
 	for(int i = 0; i < initPageCount - 1; ++i) {
 		page->setNext(new memPage_t);
 		page = page->getNext();
@@ -28,7 +28,7 @@ memPool_t::memPool_t(int initPageCount) :
 }
 
 memPool_t::~memPool_t() {
-	memPage_t* page = firstPage;
+	memPage_t* page = &firstPage;
 	while (page != NULL) {
 		memPage_t* next = page->getNext();
 		delete page;
@@ -40,7 +40,7 @@ memPool_t::~memPool_t() {
 int memPool_t::setPosition(int newPos) {
 	if (newPos < 0 || newPos > size) return -1;
 	int remPos = newPos;
-	memPage_t* page = firstPage;
+	memPage_t* page = &firstPage;
 	while (remPos > page->getCapacity()) {
 		remPos -= page->getCapacity();
 		page = page->getNext();
