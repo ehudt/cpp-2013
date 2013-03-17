@@ -3,7 +3,7 @@
 class memPool_t {
 	public: // member functions
 		memPool_t(); // Default CTOR
-		memPool_t(int initPageCount); // CTOR from initial empty page count
+		memPool_t(int initPageCount); // CTOR from initial empty page count. if initPageCount <= 0, the pool is initialized with a default of 1 page.
 		~memPool_t(); // DTOR
 		int setPosition(int newPos); // Set the current position. Returns the new position or -1 on error
 		int getPosition() const; // Get the current position

@@ -25,7 +25,7 @@ int main() {
 		if (arr2[i] != 100 - i) assert(1 == 0);
 	}
 	delete pool;
-	pool = new memPool_t();
+	pool = new memPool_t(-10);
 	char s1[] = "Calling a destructor explicitly is seldom necessary. However, it can be useful to perform cleanup of objects placed at absolute addresses.";
 	assert(pool->write(s1, sizeof(s1), 0) == sizeof(s1));
 	char *s2 = new char[sizeof(s1)];
