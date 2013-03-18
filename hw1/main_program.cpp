@@ -12,7 +12,7 @@ int main(void) {
 	cout << "An int: " << x << endl;
 	cout << "A C-string: " << s1 << endl;
 	cout << "An array of doubles: ";
-	for (int i = 0; i < sizeof(d1)/sizeof(double); ++i) {
+	for (int i = 0; i < (int)(sizeof(d1)/sizeof(double)); ++i) {
 		cout << d1[i] << " ";
 	}
 	cout << endl;
@@ -35,7 +35,7 @@ int main(void) {
 	cout << "The int: " << y << endl;
 	cout << "The C-string: " << s2 << endl;
 	cout << "The array of doubles: ";
-	for (int i = 0; i < sizeof(d2)/sizeof(double); ++i) {
+	for (int i = 0; i < (int)(sizeof(d2)/sizeof(double)); ++i) {
 		cout << d2[i] << " ";
 	}
 	cout << endl;
