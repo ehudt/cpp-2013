@@ -1,3 +1,6 @@
+#ifndef MEMPOOL_H
+#define MEMPOOL_H
+
 #include "memPage_t.h"
 
 class memPool_t {
@@ -28,3 +31,5 @@ class memPool_t {
 		memPage_t& firstPage; // First page of the pool (all pages are in a linked list)
 		memPage_t* currentPage; // The page where the current position is.
 };
+
+#endif // MEMPOOL_H

@@ -13,7 +13,7 @@ memPool_t::memPool_t() :
 {}
 
 memPool_t::memPool_t(int initPageCount) :
-	pageCount((max(initPageCount, 1))),
+	pageCount((max(initPageCount, 1))), // must avoid a non-positive page count
 	size(0),
 	capacity(initPageCount * memPage_t::getNewPageSize()),
 	position(0),

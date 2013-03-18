@@ -1,3 +1,6 @@
+#ifndef MEMPAGE_H
+#define MEMPAGE_H
+
 class memPage_t {
 	public: // member functions
 		memPage_t(); // Default CTOR
@@ -28,3 +31,4 @@ class memPage_t {
 		memPage_t* next; // Pointer to the next page
 };
 
+#endif // MEMPAGE_H
