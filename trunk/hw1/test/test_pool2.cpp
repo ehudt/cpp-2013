@@ -1,4 +1,4 @@
-#include "memPool_t.h"
+#include "../memPool_t.h"
 #include <assert.h>
 
 int main(){
@@ -18,8 +18,4 @@ int main(){
 	assert(p.getSize() == 24);
 	assert(p.getPosition() == 24);
 	assert(p.getPageCount() ==2);
-
-
-
-
 }
