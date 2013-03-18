@@ -1,4 +1,4 @@
-#include "memPage_t.h"
+#include "../memPage_t.h"
 #include <assert.h>
 
 int main(){
