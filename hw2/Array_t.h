@@ -8,9 +8,9 @@ class Array_t : public Container_t<T>{
 	public:
 		virtual Array_t(); // Default CTOR
 		virtual ~Array_t(); // Pure virtual DTOR
-		virtual Array_t(const Array_t& array); // Copy CTOR
-		virtual const Array_t& operator= (const Array_t& array); // Operator =
-		virtual T& operator[] (int index); //TODO: const T& ?
+		virtual Array_t(const Array_t<T>& array); // Copy CTOR
+		virtual const Array_t& operator= (const Array_t<T>& array); // Operator =
+		virtual T& operator[] (int index) const;
 		virtual int count() const;
 		virtual T* find(T& element) const;
 		virtual bool insert(T& element);
@@ -32,26 +32,39 @@ class Array_t : public Container_t<T>{
 int Array_t<class T>::initialSize = 16;
 int Array_t<class T>::expandValue = 4;
 
-Array_t<class T>::Array_t() :
+template <class T>
+Array_t<T>::Array_t() :
 	array(new T[initialSize]),
 	count_(0),
 	capacity(initialSize)
 		{}
 
-Array_t<class T>::~Array_t() {
+template <class T>
+Array_t<T>::~Array_t() {
 	delete[] array;
 }
 
-Array_t<class T>::Array_t(const Array_t& array) :
-	array(new T[array.capacity]),
-	count_(array.count_),
-	capacity(array.capacity)
+template <class T>
+Array_t<T>::Array_t(const Array_t& existingArray) :
+	array(new T[existingArray.capacity]),
+	count_(existingArray.count_),
+	capacity(existingArray.capacity)
 {
 	for (int i = 0; i < this->count_; ++i) {
-		this[i] = array[i];
+		this[i] = existingArray[i];
 	}
 }
 
+template <class T>
+const Array_t& Array_t<T>::operator =(const Array_t& existingArray) {
+	if (&existingArray != this) {
+		delete[] this->array;
+		this->array = new T[existingArray.capacity];
+		this->count_ = existingArray.count;
+		this->capacity = existingArray.capacity;
+	}
+	return *this;
+}
 
 
 #endif
