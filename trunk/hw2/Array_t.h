@@ -20,6 +20,38 @@ class Array_t : public Container_t<T>{
 		virtual bool removeAndDelete(T& element);
 		virtual bool removeAll();
 		virtual bool removeAllAndDelete();
+
+	private:
+		T** array;
+		static int initialSize;
+		static int expandValue;
+		int count_; // current number of elements in the array
+		int capacity; // total capacity
 };
+
+int Array_t<class T>::initialSize = 16;
+int Array_t<class T>::expandValue = 4;
+
+Array_t<class T>::Array_t() :
+	array(new T[initialSize]),
+	count_(0),
+	capacity(initialSize)
+		{}
+
+Array_t<class T>::~Array_t() {
+	delete[] array;
+}
+
+Array_t<class T>::Array_t(const Array_t& array) :
+	array(new T[array.capacity]),
+	count_(array.count_),
+	capacity(array.capacity)
+{
+	for (int i = 0; i < this->count_; ++i) {
+		this[i] = array[i];
+	}
+}
+
+
 
 #endif
