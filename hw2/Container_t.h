@@ -1,18 +1,22 @@
+#ifndef _CONTAINER_T_H
+#define _CONTAINER_T_H
+
 template <class T>
 class Container_t {
 	public:
-		Container_t(); // Default CTOR
-		~Container_t(); // DTOR
-		Container_t(const Container_t& container); // Copy CTOR
-		const Container_t& operator= (const Container_t& container); // Operatot =
-		int count() const;
-		T* find(T& element) const;
-		bool insert(T& element); // TODO: handle exceptions
-		bool append(T& element, int index); // TODO: handle exceptions
-		bool prepend(T& element, int index); // TODO: handle exceptions
-		T* remove(T& element);
-		bool removeAndDelete(T& element); // TODO: handle exceptions
-		bool removeAll(); // TODO: handle exceptions
-		bool removeAllAndDelete(); // TODO: handle exceptions
-
+		virtual Container_t() = 0; // Default CTOR // TODO: pure virtual?
+		virtual ~Container_t() = 0; // Pure virtual DTOR
+		virtual Container_t(const Container_t& container) = 0; // Copy CTOR
+		virtual const Container_t& operator= (const Container_t& container) = 0; // Operator =
+		virtual int count() const = 0;
+		virtual T* find(T& element) const = 0;
+		virtual bool insert(T& element) = 0; // TODO: handle exceptions
+		virtual bool append(T& element, int index) = 0; // TODO: handle exceptions
+		virtual bool prepend(T& element, int index) = 0; // TODO: handle exceptions
+		virtual T* remove(T& element) = 0;
+		virtual bool removeAndDelete(T& element) = 0; // TODO: handle exceptions
+		virtual bool removeAll() = 0; // TODO: handle exceptions
+		virtual bool removeAllAndDelete() = 0; // TODO: handle exceptions
 };
+
+#endif
