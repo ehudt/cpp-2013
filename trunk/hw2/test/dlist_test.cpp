@@ -1,5 +1,53 @@
 #include "../Dlist_t.h"
 #include <cassert>
+#include <iostream>
+using namespace std;
+
+template <class T>
+void assert_equal(Dlist_t<T>& list1, Dlist_t<T>& list2) {
+	list1.reset();
+	list2.reset();
+	assert(list1.count() == list2.count());
+	T* p1 = list1.next();
+	T* p2 = list2.next();
+	for (int i = 0; i < list1.count(); ++i) {
+		assert(p1);
+		assert(p2);
+		assert(*p1 == *p2);
+		p1 = list1.next();
+		p2 = list2.next();
+	}
+	assert(p1 == 0);
+	assert(p2 == 0);
+	list1.reset();
+	list2.reset();
+}
+
+template <class T>
+void assert_range(Dlist_t<T>& list) {
+	list.reset();
+	T* p = list.next();
+	for (int i = 0; i < list.count(); ++i) {
+		assert(p);
+		assert(i == *p);
+		p = list.next();
+	}
+	assert(p == 0);
+	p = list.prev();
+	for (int i = list.count() - 1; i >= 0; --i) {
+		assert(p);
+		assert(i == *p);
+		p = list.prev();
+	}
+	assert(p == 0);
+	for (int i = 0; i < list.count() / 2; ++i) {
+		list.next();
+	}
+	list.reset();
+	assert(*list.next() == 0);
+	assert(*list.next() == 1);
+	list.reset();
+}
 
 void Dlist_t_test1(){
 	Dlist_t<int> list1;
@@ -31,9 +79,11 @@ void Dlist_t_test1(){
 	assert_range(*list2p);
 
 	// remove all from list2
+	cout << list2p->count() << endl;
 	for (int i = 0; i < list2p->count(); ++i) {
 		assert(*list2p->remove(i) == i);
 	}
+	cout << list2p->count() << endl;
 	assert(list2p->count() == 0);
 
 	// copy list1 into list2 again
@@ -71,48 +121,4 @@ void Dlist_t_test1(){
 	// clean up
 	list1.removeAllAndDelete();
 	assert(list1.count() == 0);
-}
-
-template <class T>
-void assert_equal(Dlist_t<T>& list1, Dlist_t<T>& list2) {
-	list1.reset();
-	list2.reset();
-	assert(list1.count() == list2.count());
-	T* p1 = list1.next();
-	T* p2 = list2.next();
-	for (int i = 0; i < list1.count(); ++i) {
-		assert(p1);
-		assert(p2);
-		assert(*p1 == *p2);
-		p1 = list1.next();
-		p2 = list2.next();
-	}
-	assert(p1 == 0);
-	assert(p2 == 0);
-	list1.reset();
-	list2.reset();
-}
-
-template <class T>
-void assert_range(Dlist_t<T>& list) {
-	list.reset();
-	T* p = list.next();
-	for (int i = 0; i < list.count(); ++i) {
-		assert(p) && assert (i == *p);
-		p = list.next();
-	}
-	assert(p == 0);
-	p = list.prev();
-	for (int i = list.count() - 1; i >= 0; --i) {
-		assert(p) && assert (i == *p);
-		p = list.prev();
-	}
-	assert(p == 0);
-	for (int i = 0; i < list.count() / 2; ++i) {
-		list.next();
-	}
-	reset();
-	assert(*list.next() == 0);
-	assert(*list.next() == 1);
-	list.reset();
 }

@@ -13,13 +13,16 @@ public:
 	//virtual const Container_t& operator= (const Container_t<T>& container) = 0; // Operator =
 	virtual int count() const = 0;
 	virtual T* find(const T& element) const = 0;
-	virtual bool insert(const T& element) = 0; // TODO: handle exceptions
-	virtual bool append(const T& element, int index) throw(Error) = 0; // TODO: handle exceptions
-	virtual bool prepend(const T& element, int index) throw(Error) = 0; // TODO: handle exceptions
+	virtual bool insert(T& element) = 0; // TODO: handle exceptions
+	virtual bool append(T& element, int index) throw(Error) = 0; // TODO: handle exceptions
+	virtual bool prepend(T& element, int index) throw(Error) = 0; // TODO: handle exceptions
 	virtual T* remove(const T& element) = 0;
 	virtual bool removeAndDelete(const T& element) = 0; // TODO: handle exceptions
 	virtual bool removeAll() = 0; // TODO: handle exceptions
 	virtual bool removeAllAndDelete() = 0; // TODO: handle exceptions
 };
+
+template <class T>
+Container_t<T>::~Container_t() {}
 
 #endif
