@@ -8,20 +8,20 @@
 template <class T>
 class Array_t : public Container_t<T> {
 	public:
-		virtual Array_t(); // Default CTOR
-		virtual ~Array_t(); // Pure virtual DTOR
-		virtual Array_t(const Array_t<T>& array); // Copy CTOR
-		virtual const Array_t& operator= (const Array_t<T>& array); // Operator =
-		virtual T& operator[] (int index) const;
-		virtual int count() const;
-		virtual T* find(const T& element) const;
-		virtual bool insert(const T& element);
-		virtual bool append(const T& element, int index);
-		virtual bool prepend(const T& element, int index);
-		virtual T* remove(const T& element);
-		virtual bool removeAndDelete(const T& element);
-		virtual bool removeAll();
-		virtual bool removeAllAndDelete();
+		Array_t(); // Default CTOR
+		~Array_t(); // Pure virtual DTOR
+		Array_t(const Array_t<T>& array); // Copy CTOR
+		const Array_t& operator= (const Array_t<T>& array); // Operator =
+		T& operator[] (int index) const;
+		int count() const;
+		T* find(const T& element) const;
+		bool insert(T& element);
+		bool append(T& element, int index) throw(typename Container_t<T>::Error);
+		bool prepend(T& element, int index) throw(typename Container_t<T>::Error);
+		T* remove(const T& element);
+		bool removeAndDelete(const T& element);
+		bool removeAll();
+		bool removeAllAndDelete();
 
 	private:
 		T** array;
@@ -31,8 +31,12 @@ class Array_t : public Container_t<T> {
 		int capacity; // total capacity
 };
 
-int Array_t<class T>::initialSize = 16;
-int Array_t<class T>::expandValue = 4;
+
+template <class T>
+int Array_t<T>::initialSize = 16;
+
+template <class T>
+int Array_t<T>::expandValue = 4;
 
 template <class T>
 Array_t<T>::Array_t() :
@@ -58,7 +62,7 @@ Array_t<T>::Array_t(const Array_t& existingArray) :
 }
 
 template <class T>
-const Array_t& Array_t<T>::operator =(const Array_t& existingArray) {
+const Array_t<T>& Array_t<T>::operator =(const Array_t& existingArray) {
 	if (&existingArray != this) {
 		delete[] this->array;
 		this->array = new T[existingArray.capacity];
@@ -90,7 +94,7 @@ T* Array_t<T>::find(const T& element) const{
 }
 
 template <class T>
-bool Array_t<T>::insert(const T& element){
+bool Array_t<T>::insert(T& element){
 	if (this->capacity > this->count()) {
 		this[count] = &element;
 		this->count_++;
@@ -113,7 +117,7 @@ bool Array_t<T>::insert(const T& element){
 }
 
 template <class T>
-bool Array_t<T>::append(const T& element, int index){
+bool Array_t<T>::append(T& element, int index) throw(typename Container_t<T>::Error){
 	if (index > this->count() || index < 0) throw Container_t<T>::IndexOutOfBounds;
 		else {
 			if (index == this->count()){
@@ -146,8 +150,8 @@ bool Array_t<T>::append(const T& element, int index){
 
 
 template <class T>
-bool Array_t<T>::prepend(const T& element, int index){
-	if (index > this->count() || index < 0) throw Container_t<T>::IndexOutOfBounds;
+bool Array_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::Error){
+	if (index > this->count() || index < 0) throw Container_t<T>::Error;
 	else {
 		if (index == this->count()){
 			T* t = this->array[index];
