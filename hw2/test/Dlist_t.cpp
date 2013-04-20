@@ -1,5 +1,4 @@
 #include "../Dlist_t.h"
-#include <iostream>
 #include <cassert>
 
 void Dlist_t_test1(){

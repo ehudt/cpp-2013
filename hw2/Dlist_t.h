@@ -150,6 +150,7 @@ inline bool Dlist_t<T>::insert(const T& element) {
 	newNode->setPrev(lastNode);
 	newNode->setNext(getTail());
 	getTail()->setPrev(newNode);
+	++count_;
 	return true;
 }
 
@@ -165,6 +166,7 @@ inline bool Dlist_t<T>::append(const T& element, int index) {
 	newNode->setPrev(cursor);
 	newNode->setNext(nextNode);
 	nextNode->setPrev(newNode);
+	++count_;
 	return true;
 }
 
@@ -180,6 +182,7 @@ inline bool Dlist_t<T>::prepend(const T& element, int index) {
 		newNode->setPrev(prevNode);
 		newNode->setNext(cursor);
 		cursor->setPrev(newNode);
+		++count_;
 		return true;
 }
 
@@ -198,6 +201,7 @@ inline T* Dlist_t<T>::remove(const T& element) {
 	}
 	T* elementPtr = nodeToRemove->value();
 	removeNode(nodeToRemove);
+	--count_;
 	reset();
 	return elementPtr;
 }
@@ -209,6 +213,7 @@ inline bool Dlist_t<T>::removeAndDelete(const T& element) {
 		return false;
 	}
 	delete elementToDelete;
+	--count_;
 	reset();
 	return true;
 }
@@ -225,6 +230,7 @@ inline void Dlist_t<T>::removeAllExplicit(bool deleteAll) {
 		}
 		removeNode(tmp);
 	}
+	count_ = 0;
 	reset();
 }
 template<class T>
