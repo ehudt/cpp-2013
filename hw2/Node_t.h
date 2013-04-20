@@ -10,9 +10,9 @@ class Node_t {
 		Node_t(const Node_t& existingNode); // Copy CTOR - only copies pointer to element. prev and next are set to zero
 		const Node_t& operator= (const Node_t& existingNode); // operator= - same behaviour as copy CTOR
 		T* value() const;
-		Node_t* getNext();
+		Node_t* getNext() const;
 		void setNext(Node_t* node);
-		Node_t* getPrev();
+		Node_t* getPrev() const;
 		void setPrev(Node_t* node);
 
 	private:
@@ -30,7 +30,7 @@ Node_t<T>::Node_t(T& value) :
 
 template <class T>
 Node_t<T>::Node_t(T* value) :
-	valuePtr(valuePtr),
+	valuePtr(value),
 	prev(0),
 	next(0)
 	{}
@@ -43,8 +43,8 @@ Node_t<T>::Node_t(const Node_t& existingNode) :
 	{}
 
 template <class T>
-const Node_t& Node_t<T>::operator =(const Node_t& existingNode) {
-	if (*this != existingNode) {
+const Node_t<T>& Node_t<T>::operator =(const Node_t& existingNode) {
+	if (this != &existingNode) {
 		valuePtr = existingNode.valuePtr;
 		next = 0;
 		prev = 0;
@@ -58,7 +58,7 @@ T* Node_t<T>::value() const {
 }
 
 template <class T>
-Node_t* Node_t<T>::getNext() {
+Node_t<T>* Node_t<T>::getNext() const {
 	return next;
 }
 
@@ -68,7 +68,7 @@ void Node_t<T>::setNext(Node_t* node) {
 }
 
 template <class T>
-Node_t* Node_t<T>::getPrev() {
+Node_t<T>* Node_t<T>::getPrev() const {
 	return prev;
 }
 
@@ -76,3 +76,5 @@ template <class T>
 void Node_t<T>::setPrev(Node_t* node) {
 	prev = node;
 }
+
+#endif

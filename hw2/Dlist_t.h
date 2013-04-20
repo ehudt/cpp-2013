@@ -1,6 +1,9 @@
 #ifndef _DLIST_T_H
 #define _DLIST_T_H
 
+#include "Container_t.h"
+#include "Node_t.h"
+
 template <class T>
 class Dlist_t : public Container_t<T>{
 	public:
@@ -10,30 +13,30 @@ class Dlist_t : public Container_t<T>{
 		const Dlist_t& operator= (const Dlist_t<T>& dlist); // Operator =
 		int count() const;
 		T* find(const T& element) const;
-		bool insert(const T& element);
-		bool append(const T& element, int index) throw(Container_t<T>::Error);
-		bool prepend(const T& element, int index) throw(Container_t<T>::Error);
+		bool insert(T& element);
+		bool append(T& element, int index) throw(typename Container_t<T>::Error);
+		bool prepend(T& element, int index) throw(typename Container_t<T>::Error);
 		T* remove(const T& element);
 		bool removeAndDelete(const T& element);
-		void removeAll();
-		void removeAllAndDelete();
+		bool removeAll();
+		bool removeAllAndDelete();
 		T* next();
 		T* prev();
 		void reset();
 
 
 	private:
-		Node_t<T>* getNode(int index) const;
+		Node_t<T>* getNodeByIndex(int index) const;
 		Node_t<T>* getNode(const T& element) const;
 		void insertAll(const Dlist_t<T>& dlist);
-		const Node_t<T>* const getHead() const;
-		const Node_t<T>* const getTail() const;
-		const Node_t<T>* getCurrent() const;
-		void setCurrent(const Node_t<T>* current);
+		Node_t<T>* const getHead() const;
+		Node_t<T>* const getTail() const;
+		Node_t<T>* const getCurrent() const;
+		void setCurrent(Node_t<T>* current);
 		void removeAllExplicit(bool deleteAll);
 
-		const Node_t<T>* const head;
-		const Node_t<T>* const tail;
+		Node_t<T>* const head;
+		Node_t<T>* const tail;
 		Node_t<T>* current;
 		int count_;
 };
@@ -69,20 +72,21 @@ Dlist_t<T>::Dlist_t(const Dlist_t<T>& dlist) : // Copy CTOR
 }
 
 template <class T>
-const Dlist_t& Dlist_t<T>::operator= (const Dlist_t<T>& dlist) {
-	if (*this != dlist) {
+const Dlist_t<T>& Dlist_t<T>::operator= (const Dlist_t<T>& dlist) {
+	if (this != &dlist) {
 		removeAll();
 		insertAll(dlist);
 	}
+	return *this;
 }
 
 template <class T>
-const Node_t<T>* const Dlist_t<T>::getHead() const {
+Node_t<T>* const Dlist_t<T>::getHead() const {
 	return head;
 }
 
 template <class T>
-const Node_t<T>* const Dlist_t<T>::getTail() const {
+Node_t<T>* const Dlist_t<T>::getTail() const {
 	return tail;
 }
 
@@ -110,20 +114,20 @@ Node_t<T>* Dlist_t<T>::getNode(const T& element) const {
 }
 
 template <class T>
-Node_t<T>* Dlist_t<T>::getNode(int index) const {
-	Node_t<T>* listCursor = dlist.getHead()->getNext();
-	while (index && listCursor != dlist.getTail()) {
+Node_t<T>* Dlist_t<T>::getNodeByIndex(int index) const {
+	Node_t<T>* listCursor = getHead()->getNext();
+	while (index && listCursor != getTail()) {
 		listCursor = listCursor->getNext();
 		--index;
 	}
-	if (listCursor == dlist.getTail()) {
+	if (listCursor == getTail()) {
 		return 0;
 	}
 	return listCursor;
 }
 
 template <class T>
-inline const Node_t<T>* Dlist_t<T>::getCurrent() const {
+inline Node_t<T>* const Dlist_t<T>::getCurrent() const {
 	return current;
 }
 
@@ -143,7 +147,7 @@ inline T* Dlist_t<T>::find(const T& element) const {
 }
 
 template<class T>
-inline bool Dlist_t<T>::insert(const T& element) {
+inline bool Dlist_t<T>::insert(T& element) {
 	Node_t<T>* newNode = new Node_t<T>(element);
 	Node_t<T>* lastNode = getTail()->getPrev();
 	lastNode->setNext(newNode);
@@ -155,8 +159,8 @@ inline bool Dlist_t<T>::insert(const T& element) {
 }
 
 template<class T>
-inline bool Dlist_t<T>::append(const T& element, int index) {
-	Node_t<T>* cursor = getNode(index);
+inline bool Dlist_t<T>::append(T& element, int index) throw(typename Container_t<T>::Error) {
+	Node_t<T>* cursor = getNodeByIndex(index);
 	if (!cursor) {
 		throw Container_t<T>::IndexOutOfBounds;
 	}
@@ -171,8 +175,8 @@ inline bool Dlist_t<T>::append(const T& element, int index) {
 }
 
 template<class T>
-inline bool Dlist_t<T>::prepend(const T& element, int index) {
-	Node_t<T>* cursor = getNode(index);
+inline bool Dlist_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::Error) {
+	Node_t<T>* cursor = getNodeByIndex(index);
 		if (!cursor) {
 			throw Container_t<T>::IndexOutOfBounds;
 		}
@@ -195,7 +199,7 @@ static void removeNode(Node_t<T>* node) {
 
 template <class T>
 inline T* Dlist_t<T>::remove(const T& element) {
-	Node_t<T> nodeToRemove = getNode(element);
+	Node_t<T>* nodeToRemove = getNode(element);
 	if (!nodeToRemove) {
 		return 0;
 	}
@@ -221,9 +225,9 @@ inline bool Dlist_t<T>::removeAndDelete(const T& element) {
 
 template<class T>
 inline void Dlist_t<T>::removeAllExplicit(bool deleteAll) {
-	Node_t<T> listCursor = getHead()->getNext();
+	Node_t<T>* listCursor = getHead()->getNext();
 	while (listCursor != getTail()) {
-		Node_t<T> tmp = listCursor;
+		Node_t<T>* tmp = listCursor;
 		listCursor = listCursor->getNext();
 		if (deleteAll) {
 			delete tmp->value();
@@ -234,13 +238,15 @@ inline void Dlist_t<T>::removeAllExplicit(bool deleteAll) {
 	reset();
 }
 template<class T>
-inline void Dlist_t<T>::removeAll() {
-	removeAllExplicit(flase);
+inline bool Dlist_t<T>::removeAll() {
+	removeAllExplicit(false);
+	return true;
 }
 
 template<class T>
-inline void Dlist_t<T>::removeAllAndDelete() {
+inline bool Dlist_t<T>::removeAllAndDelete() {
 	removeAllExplicit(true);
+	return true;
 }
 
 template<class T>
@@ -265,7 +271,7 @@ inline void Dlist_t<T>::reset() {
 }
 
 template <class T>
-inline void Dlist_t<T>::setCurrent(const Node_t<T>* current) {
+inline void Dlist_t<T>::setCurrent(Node_t<T>* current) {
 	this->current = current;
 }
 
