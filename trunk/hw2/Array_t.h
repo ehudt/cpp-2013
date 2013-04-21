@@ -192,7 +192,7 @@ T* Array_t<T>::remove(const T& element){
 
 	T* elementPointer = this->array[i];
 
-	for (int j=i; j< this->capacity; j++){
+	for (int j=i; j < this-> capacity-1; j++){
 		this->array[j] = this->array[j+1];
 	}
 	this->count_--;
