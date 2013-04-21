@@ -47,18 +47,17 @@ capacity(initialSize)
 
 template <class T>
 Array_t<T>::~Array_t() {
-	this->removeAllAndDelete();
 	delete[] array;
 }
 
 template <class T>
 Array_t<T>::Array_t(const Array_t& existingArray) :
-array(new T*[existingArray.capacity]),
-count_(existingArray.count_),
-capacity(existingArray.capacity)
+	array(new T*[existingArray.capacity]),
+	count_(existingArray.count_),
+	capacity(existingArray.capacity)
 {
 	for (int i = 0; i < this->count_; ++i) {
-		this[i] = existingArray[i];
+		array[i] = &existingArray[i];
 	}
 }
 
@@ -67,7 +66,7 @@ const Array_t<T>& Array_t<T>::operator =(const Array_t& existingArray) {
 	if (&existingArray != this) {
 		T** newArray = new T*[existingArray.capacity];
 		for (int i = 0; i < existingArray.count(); i++){
-			newArray[i] = existingArray[i];
+			newArray[i] = &existingArray[i];
 		}
 
 		this->count_ = existingArray.count_;
