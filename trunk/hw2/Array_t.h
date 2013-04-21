@@ -40,7 +40,7 @@ int Array_t<T>::expandValue = 4;
 
 template <class T>
 Array_t<T>::Array_t() :
-	array(new T[initialSize]),
+	array(new T*[initialSize]),
 	count_(0),
 	capacity(initialSize)
 		{}
@@ -86,8 +86,8 @@ int Array_t<T>::count() const{
 template <class T>
 T* Array_t<T>::find(const T& element) const{
 	for (int i=0; i < this->count(); i++){
-		if (*(this[i]) == element) {
-			return this[i];
+		if (*(this->array[i]) == element) {
+			return this->array[i];
 		}
 	}
 	return NULL;
@@ -96,12 +96,12 @@ T* Array_t<T>::find(const T& element) const{
 template <class T>
 bool Array_t<T>::insert(T& element){
 	if (this->capacity > this->count()) {
-		this[count] = &element;
+		this->array[this->count()] = &element;
 		this->count_++;
 		return 1;
 	}
 	else {
-		T** temp = new T[this->capacity + expandValue];
+		T** temp = new T*[this->capacity + expandValue];
 		for (int i=0; i < this->capacity; i++){
 			temp[i] = this->array[i];
 		}
@@ -109,7 +109,7 @@ bool Array_t<T>::insert(T& element){
 		this->capacity += expandValue;
 		this->array = temp;
 		delete[] temp;
-		this[count] = &element;
+		this->array[this->count()] = &element;
 		this->count_++;
 		return 1;
 	}
@@ -126,11 +126,11 @@ bool Array_t<T>::append(T& element, int index) throw(typename Container_t<T>::Er
 			else{
 				T** temp;
 				if (this->count()+1 > this->capacity){
-					temp = new T[this->capacity+expandValue];
+					temp = new T*[this->capacity+expandValue];
 					this->capacity = capacity+expandValue;
 				}
 				else
-					temp = new T[this->capacity];
+					temp = new T*[this->capacity];
 
 				for (int i=0; i < index+1; i++)
 					temp[i] = this->array[i];
@@ -151,7 +151,7 @@ bool Array_t<T>::append(T& element, int index) throw(typename Container_t<T>::Er
 
 template <class T>
 bool Array_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::Error){
-	if (index > this->count() || index < 0) throw Container_t<T>::Error;
+	if (index > this->count() || index < 0) throw "ERROR";//TODO
 	else {
 		if (index == this->count()){
 			T* t = this->array[index];
@@ -161,11 +161,11 @@ bool Array_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::E
 		else{
 			T** temp;
 			if (this->count()+1 > this->capacity){
-				temp = new T[this->capacity+expandValue];
+				temp = new T*[this->capacity+expandValue];
 				this->capacity = capacity+expandValue;
 			}
 			else
-				temp = new T[this->capacity];
+				temp = new T*[this->capacity];
 
 
 			for (int i=0; i < index; i++)
