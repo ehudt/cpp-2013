@@ -79,11 +79,9 @@ void Dlist_t_test1(){
 	assert_range(*list2p);
 
 	// remove all from list2
-	cout << list2p->count() << endl;
-	for (int i = 0; i < list2p->count(); ++i) {
+	for (int i = 0, count = list2p->count(); i < count; ++i) {
 		assert(*list2p->remove(i) == i);
 	}
-	cout << list2p->count() << endl;
 	assert(list2p->count() == 0);
 
 	// copy list1 into list2 again
@@ -107,7 +105,6 @@ void Dlist_t_test1(){
 		assert(list3.removeAndDelete(i));
 	}
 	assert(list3.count() == 0);
-
 
 	// Append a new entry in the middle and try and find it
 	int new_num = limit * 2;

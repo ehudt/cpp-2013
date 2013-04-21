@@ -217,7 +217,6 @@ inline bool Dlist_t<T>::removeAndDelete(const T& element) {
 		return false;
 	}
 	delete elementToDelete;
-	--count_;
 	reset();
 	return true;
 }
