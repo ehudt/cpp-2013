@@ -51,7 +51,7 @@ void assert_range(Dlist_t<T>& list) {
 
 void Dlist_t_test1(){
 	Dlist_t<int> list1;
-	const int limit = 10;
+	const int limit = 100;
 
 	// Insert consecutive numbers and make sure that they are inserted in order
 	for (int i = 0; i < limit; ++i) {
