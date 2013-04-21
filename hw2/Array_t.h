@@ -144,25 +144,26 @@ bool Array_t<T>::append(T& element, int index) throw(typename Container_t<T>::Er
 
 template <class T>
 bool Array_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::Error){
-	if (index > this->count() || index < 0) throw "ERROR";//TODO
+	if (index >= count() || index < 1) throw Container_t<T>::IndexOutOfBounds;
 	else {
-		if (index == this->count()){
-			T* t = this->array[index];
-			this->array[index] = &element;
-			return this->insert(*t);
+		if (index == count()-1){
+			T* t = array[index];
+			array[index] = &element;
+			return insert(*t);
 		}
+
 		else{
 			T** temp;
-			if (this->count()+1 > this->capacity){
-				temp = new T*[this->capacity+expandValue];
-				this->capacity = capacity+expandValue;
+			if (count()+1 > capacity){
+				temp = new T*[capacity+expandValue];
+				capacity = capacity+expandValue;
 			}
 			else
-				temp = new T*[this->capacity];
+				temp = new T*[capacity];
 
 
 			for (int i=0; i < index; i++)
-				temp[i] = this->array[i];
+				temp[i] = array[i];
 
 			temp[index] = &element;
 
