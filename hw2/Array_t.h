@@ -65,10 +65,15 @@ capacity(existingArray.capacity)
 template <class T>
 const Array_t<T>& Array_t<T>::operator =(const Array_t& existingArray) {
 	if (&existingArray != this) {
-		delete[] this->array;
-		this->array = new T*[existingArray.capacity];
+		T** newArray = new T*[existingArray.capacity];
+		for (int i = 0; i < existingArray.count(); i++){
+			newArray[i] = existingArray[i];
+		}
+
 		this->count_ = existingArray.count_;
 		this->capacity = existingArray.capacity;
+		delete[] this->array;
+		this->array = newArray;
 	}
 	return *this;
 }
