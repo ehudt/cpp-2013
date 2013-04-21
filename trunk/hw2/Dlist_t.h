@@ -8,7 +8,7 @@ template <class T>
 class Dlist_t : public Container_t<T>{
 	public:
 		Dlist_t(); // Default CTOR
-		~Dlist_t(); // DTOR
+		virtual ~Dlist_t(); // DTOR
 		Dlist_t(const Dlist_t<T>& dlist); // Copy CTOR
 		const Dlist_t& operator= (const Dlist_t<T>& dlist); // Operator =
 		int count() const;
@@ -29,9 +29,9 @@ class Dlist_t : public Container_t<T>{
 		Node_t<T>* getNodeByIndex(int index) const;
 		Node_t<T>* getNode(const T& element) const;
 		void insertAll(const Dlist_t<T>& dlist);
-		Node_t<T>* const getHead() const;
-		Node_t<T>* const getTail() const;
-		Node_t<T>* const getCurrent() const;
+		Node_t<T>* getHead() const;
+		Node_t<T>* getTail() const;
+		Node_t<T>* getCurrent() const;
 		void setCurrent(Node_t<T>* current);
 		void removeAllExplicit(bool deleteAll);
 
@@ -81,12 +81,12 @@ const Dlist_t<T>& Dlist_t<T>::operator= (const Dlist_t<T>& dlist) {
 }
 
 template <class T>
-Node_t<T>* const Dlist_t<T>::getHead() const {
+Node_t<T>* Dlist_t<T>::getHead() const {
 	return head;
 }
 
 template <class T>
-Node_t<T>* const Dlist_t<T>::getTail() const {
+Node_t<T>* Dlist_t<T>::getTail() const {
 	return tail;
 }
 
@@ -127,7 +127,7 @@ Node_t<T>* Dlist_t<T>::getNodeByIndex(int index) const {
 }
 
 template <class T>
-inline Node_t<T>* const Dlist_t<T>::getCurrent() const {
+inline Node_t<T>* Dlist_t<T>::getCurrent() const {
 	return current;
 }
 

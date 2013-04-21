@@ -2,7 +2,6 @@
 #include "Dlist_t.h"
 #include "Array_t.h"
 #include <iostream>
-
 using namespace std;
 
 void Dlist_t_test1();
