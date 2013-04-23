@@ -20,8 +20,8 @@ public:
 	bool prepend(T& element, int index) throw(typename Container_t<T>::Error);
 	T* remove(const T& element);
 	bool removeAndDelete(const T& element);
-	bool removeAll();
-	bool removeAllAndDelete();
+	void removeAll();
+	void removeAllAndDelete();
 
 private:
 	T** array;
@@ -211,24 +211,20 @@ bool Array_t<T>::removeAndDelete(const T& element){
 }
 
 template <class T>
-bool Array_t<T>::removeAll(){
+void Array_t<T>::removeAll(){
 	for (int i=0; i < this->count(); i++){
 		this->array[i] = NULL;
 	}
-
 	this->count_ = 0;
-	return 1;
 }
 
 template <class T>
-bool Array_t<T>::removeAllAndDelete(){
+void Array_t<T>::removeAllAndDelete(){
 	for (int i = 0; i < this->count(); i++){
 		delete this->array[i];
 		this->array[i] = NULL;
 	}
-
 	this->count_ = 0;
-	return 1;
 }
 
 

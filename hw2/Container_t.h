@@ -12,13 +12,13 @@ public:
 
 	virtual int count() const = 0;
 	virtual T* find(const T& element) const = 0;
-	virtual bool insert(T& element) = 0; // TODO: handle exceptions
-	virtual bool append(T& element, int index) throw(Error) = 0; // TODO: handle exceptions
-	virtual bool prepend(T& element, int index) throw(Error) = 0; // TODO: handle exceptions
+	virtual bool insert(T& element) = 0;
+	virtual bool append(T& element, int index) throw(Error) = 0;
+	virtual bool prepend(T& element, int index) throw(Error) = 0;
 	virtual T* remove(const T& element) = 0;
-	virtual bool removeAndDelete(const T& element) = 0; // TODO: handle exceptions
-	virtual bool removeAll() = 0; // TODO: handle exceptions
-	virtual bool removeAllAndDelete() = 0; // TODO: handle exceptions
+	virtual bool removeAndDelete(const T& element) = 0;
+	virtual void removeAll() = 0;
+	virtual void removeAllAndDelete() = 0;
 };
 
 template <class T>
