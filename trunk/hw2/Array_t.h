@@ -202,8 +202,12 @@ T* Array_t<T>::remove(const T& element){
 
 template <class T>
 bool Array_t<T>::removeAndDelete(const T& element){
-	delete remove(element);
-	return 1;
+	T* p = remove(element);
+	if (p) {
+		delete p;
+		return 1;
+	}
+	return 0;
 }
 
 template <class T>
