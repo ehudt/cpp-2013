@@ -28,7 +28,7 @@ private:
 	static int initialSize;
 	static int expandValue;
 	int count_; // current number of elements in the array
-	int capacity; // total capacity
+	int capacity; // total ca= i;pacity
 };
 
 
@@ -183,19 +183,23 @@ bool Array_t<T>::prepend(T& element, int index) throw(typename Container_t<T>::E
 
 template <class T>
 T* Array_t<T>::remove(const T& element){
-	int i = 0;
-	while ((*(this->array[i]) != element) && (i < capacity+1)) {
-		i++;
+	int i;
+	for (i=0; i < count(); i++){
+		if (*(array[i]) == element){
+			break;
+		}
 	}
 
-	if (i == this->capacity+1) return NULL;
+	if (i == count()) return 0;
 
-	T* elementPointer = this->array[i];
+	T* elementPointer = array[i];
 
-	for (int j=i; j < this-> capacity-1; j++){
-		this->array[j] = this->array[j+1];
+	int j;
+	for (j=i; j < count(); j++){
+		array[j] = array[j+1];
 	}
-	this->count_--;
+
+	count_--;
 
 	return elementPointer;
 }
