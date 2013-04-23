@@ -18,8 +18,8 @@ class Dlist_t : public Container_t<T>{
 		bool prepend(T& element, int index) throw(typename Container_t<T>::Error);
 		T* remove(const T& element);
 		bool removeAndDelete(const T& element);
-		bool removeAll();
-		bool removeAllAndDelete();
+		void removeAll();
+		void removeAllAndDelete();
 		T* next();
 		T* prev();
 		void reset();
@@ -237,15 +237,13 @@ inline void Dlist_t<T>::removeAllExplicit(bool deleteAll) {
 	reset();
 }
 template<class T>
-inline bool Dlist_t<T>::removeAll() {
+inline void Dlist_t<T>::removeAll() {
 	removeAllExplicit(false);
-	return true;
 }
 
 template<class T>
-inline bool Dlist_t<T>::removeAllAndDelete() {
+inline void Dlist_t<T>::removeAllAndDelete() {
 	removeAllExplicit(true);
-	return true;
 }
 
 template<class T>
