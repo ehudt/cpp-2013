@@ -13,8 +13,10 @@ public:
 
 	const Day_t& operator= (const Day_t& day);
 
+	const map<AppointmentTime_t, Appointment_t> getMeetings() const;
+
 private:
-	map<Hour_t, Appointment_t> appointments;
+	map<AppointmentTime_t, Appointment_t> appointments;
 	int day;
 
 };
