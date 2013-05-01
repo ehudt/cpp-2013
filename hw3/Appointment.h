@@ -5,7 +5,7 @@ class Appointment {
 
 public:
 	Appointment();
-	Appointment(AppointmentTime_t appTime, char* subject, char** invited);
+	Appointment(AppointmentTime_t appTime, char* subject);
 	~Appointment();
 
 	const Appointment& operator= (const Appointment& appointment);
@@ -18,7 +18,6 @@ public:
 private:
 	AppointmentTime_t  time;
 	char subject[];
-	char invited[][];
 };
 
 #endif
