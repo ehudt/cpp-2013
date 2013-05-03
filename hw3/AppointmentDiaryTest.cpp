@@ -1,9 +1,6 @@
 #include <assert.h>
-#include <iostream>
 
 #include "AppointmentDiary_t.h"
-
-using namespace std;
 
 class AppointmentDiary_t;
 class Appointment_t;
@@ -28,10 +25,10 @@ void AppointmentDiaryTest() {
 	// Reschedule appointment 1 to make room for appointment 2
 	AppointmentTime_t time3(7, 8, 0, 9, 30);
 	diary.Reschedule(app1, time3);
-	Appointment_t* tmp = diary.Get(time3);
+	const Appointment_t* tmp = diary.Get(time3);
 	assert(tmp);
 	assert(*tmp == app1);
-	AppointmentTime_t& tmp_time = tmp->getTime();
+	const AppointmentTime_t& tmp_time = tmp->getTime();
 	assert(tmp_time.getStartHour() == 8
 			&& tmp_time.getStartMinutes() == 0
 			&& tmp_time.getEndHour() == 9
@@ -39,6 +36,4 @@ void AppointmentDiaryTest() {
 
 	// Add appointment 2
 	assert(diary.Add(app2));
-
-	cout << "AppointmentDiaryTest() finished successfully!" << endl;
 }

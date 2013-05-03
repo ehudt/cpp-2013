@@ -12,9 +12,12 @@ void AppointmentDiaryTest();
 int main(void) {
 	// Run all tests in this block
 	AppointmentTimeTest();
+	cout << "AppointmentTimeTest() finished successfully!" << endl;
 	AppointmentTest();
+	cout << "AppointmentTest() finished successfully!" << endl;
 	AppointmentDiaryTest();
-	cout << "Tests passed!" << endl;
+	cout << "AppointmentDiaryTest() finished successfully!" << endl;
+	cout << "All tests passed!" << endl;
 
 
 

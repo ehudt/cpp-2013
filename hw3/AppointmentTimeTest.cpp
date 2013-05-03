@@ -99,6 +99,4 @@ void AppointmentTimeTest() {
 		if (ex == InvalidTime) caught = true;
 	}
 	assert(caught);
-
-	cout << "AppointmentTimeTest() finished successfully!" << endl;
 }

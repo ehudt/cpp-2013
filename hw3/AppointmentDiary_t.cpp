@@ -31,7 +31,7 @@ inline bool AppointmentDiary_t::Remove(const Appointment_t& appointment) {
 
 inline const Appointment_t* AppointmentDiary_t::Get(
 		const AppointmentTime_t& time) const {
-	Schedule_t::iterator it = schedule.find(time);
+	Schedule_t::const_iterator it = schedule.find(time);
 	if (it == schedule.end()) {
 		return 0;
 	}
@@ -45,7 +45,7 @@ inline bool AppointmentDiary_t::Reschedule(Appointment_t& appointment,
 	if (it == schedule.end() || it->second != appointment) {
 		return false;
 	}
-	Appointment_t* tmp = Get(new_time);
+	const Appointment_t* tmp = Get(new_time);
 	if (tmp && *tmp != appointment) {
 		return false;
 	}

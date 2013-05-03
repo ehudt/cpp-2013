@@ -5,11 +5,10 @@
 #include <stdio.h>
 #include <map>
 
-using namespace std;
+#include "AppointmentTime_t.h"
+#include "Appointment_t.h"
 
-class Appointment_t;
-class Day_t;
-class AppointmentTime_t;
+using namespace std;
 
 typedef map<AppointmentTime_t, Appointment_t, less<AppointmentTime_t> > Schedule_t;
 

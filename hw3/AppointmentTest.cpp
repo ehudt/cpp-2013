@@ -23,7 +23,4 @@ void AppointmentTest() {
 	assert(a2.getTime() == t2);
 	assert(a1.getTime() == t1);
 	assert(a1!=a2);
-	cout << a1 << endl;
-	cout << a2 << endl;
-
 }
