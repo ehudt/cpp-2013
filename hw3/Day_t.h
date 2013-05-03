@@ -11,9 +11,9 @@ public:
 	Day_t(int day);
 	virtual ~Day_t();
 
-	bool addAppointment(const Appointment_t& appointment);
-	bool removeAppointment(Appointment_t& appointment);
-	const Appointment_t& getAppointment(AppointmentTime_t& time) const;
+	virtual bool add(const Appointment_t& appointment);
+	virtual bool remove(Appointment_t& appointment);
+	virtual const Appointment_t& get(AppointmentTime_t& time) const;
 
 private:
 	Day_t(const Day_t& other);
@@ -23,3 +23,4 @@ private:
 };
 
 #endif
+''
