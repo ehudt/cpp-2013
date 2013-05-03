@@ -2,8 +2,10 @@
 #define _APPOITMENTDIARY_T_H
 
 #include <iostream>
-#include <stdio.h>
+#include <sstream>
 #include <map>
+#include <algorithm>
+#include <iomanip>
 
 #include "AppointmentTime_t.h"
 #include "Appointment_t.h"

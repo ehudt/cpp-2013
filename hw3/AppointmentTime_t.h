@@ -12,6 +12,8 @@ class AppointmentTime_t{
 public:
 	AppointmentTime_t(int day, int start_hour, int start_minutes,
 			int end_hour, int end_minutes) throw (DiaryError);
+	AppointmentTime_t(int day, int start_hour, int start_minutes,
+			int duration_in_minutes) throw (DiaryError);
 	virtual ~AppointmentTime_t();
 	AppointmentTime_t(const AppointmentTime_t& other);
 	AppointmentTime_t& operator =(const AppointmentTime_t& rhs);

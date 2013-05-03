@@ -23,6 +23,9 @@ AppointmentTime_t::AppointmentTime_t(int day, int start_hour,
 	int end_time = getTimeInMinutes(day, end_hour, end_minutes);
 	if (end_time < 0) throw InvalidTime;
 
+	// Make sure that the meeting has a positive duration (0 min. appointment not allowed)
+	if (end_time <= start_time) throw InvalidTime;
+
 	// Initialize object
 	start = start_time;
 	end = end_time;
@@ -72,6 +75,17 @@ int AppointmentTime_t::getEndHour() const {
 
 int AppointmentTime_t::getEndMinutes() const {
 	return end % hour_u;
+}
+
+AppointmentTime_t::AppointmentTime_t(int day, int start_hour, int start_minutes,
+		int duration_in_minutes) {
+	int start_time = getTimeInMinutes;
+	if (start_time < 0) throw InvalidTime;
+	int end_time = start_time + duration_in_minutes;
+	if (day < 1 + end_time / day_u) throw TwoDayMeeting;
+
+	start = start_time;
+	end = end_time;
 }
 
 int AppointmentTime_t::getDuration() const {
