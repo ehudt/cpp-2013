@@ -38,6 +38,11 @@ const string& Appointment_t::getSubject() const{
 	return this->subject;
 }
 
+ostream& operator <<(ostream& os, const Appointment_t& appointment) {
+	os << "Subject: " << appointment.getSubject() << endl;
+	return os << "Time: " << appointment.getTime() << endl;
+}
+
 void Appointment_t::setTime(const AppointmentTime_t& newTime){
 	this->appointmentTime = newTime;
 }

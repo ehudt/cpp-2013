@@ -2,10 +2,12 @@
 #define _APPOINTMENT_T_H
 #include "AppointmentTime_t.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class Appointment_t {
+	friend ostream& operator << (ostream& os, const Appointment_t& appointment);
 
 public:
 	Appointment_t(AppointmentTime_t& time, string& subject);
