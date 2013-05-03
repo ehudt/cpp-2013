@@ -1,4 +1,15 @@
 #include "AppointmentDiary_t.h"
+#include <sstream>
+	/*string week[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+	cout << endl << setfill('_') << setw(140) << " " << endl;
+	cout << "| Hour" << setfill(' ') << setw(6) << "|";
+	for (int i = 0; i < 7; i++){
+		cout << setw(week[i].length()/2) << week[i] << setw(11) << " |";
+	}
+	cout << endl;
+	cout << setfill('-') << setw(140) << " " << endl;*/
+
+
 
 ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 
