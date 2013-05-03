@@ -4,23 +4,32 @@ const int minute_u = 1;
 const int hour_u = minute_u * 60;
 const int day_u = hour_u * 24;
 
-AppointmentTime_t::AppointmentTime_t(int day, int hour, int minutes,
-		int duration_in_minutes) throw (DiaryError) {
-	// Check bounds on input
+static int getTimeInMinutes(int day, int hour, int minutes) {
 	if (!(day >= 1 && day <= 7)
 			|| !(hour >= 0 && hour <= 23)
 			|| !(minutes >= 0 && minutes <= 59)) {
-		throw InvalidTime;
+		return -1;
 	}
-	// Calculate the time in minutes passed since beginning of week
-	int start_minutes = day * day_u + hour * hour_u + minutes * minute_u;
-	// Make sure that the meeting starts and ends on the same day
-	if ((start_minutes + duration_in_minutes) / day_u > day) {
-		throw MeetingPassesMidnight;
-	}
+	return (day - 1) * day_u + hour * hour_u + minutes * minute_u;
+}
+
+AppointmentTime_t::AppointmentTime_t(int day, int start_hour,
+		int start_minutes, int end_hour, int end_minutes) throw (DiaryError) {
+	// Validate start time
+	int start_time = getTimeInMinutes(day, start_hour, start_minutes);
+	if (start_time < 0) throw InvalidTime;
+
+	// Validate end time
+	int end_time = getTimeInMinutes(day, end_hour, end_minutes);
+	if (end_time < 0) throw InvalidTime;
+
 	// Initialize object
-	start = start_minutes;
-	duration = duration_in_minutes;
+	start = start_time;
+	end = end_time;
+}
+
+bool AppointmentTime_t::operator <(const AppointmentTime_t& rhs) const {
+	return this->end <= rhs.start;
 }
 
 bool AppointmentTime_t::operator ==(const AppointmentTime_t& rhs) const {
@@ -31,42 +40,42 @@ bool AppointmentTime_t::operator !=(const AppointmentTime_t& rhs) const {
 	return !(*this == rhs);
 }
 
-AppointmentTime_t::AppointmentTime_t(int start, int duration) :
-	start(start),
-	duration(duration) {}
-
 AppointmentTime_t::~AppointmentTime_t() {}
 
 AppointmentTime_t::AppointmentTime_t(const AppointmentTime_t& other) :
 	start(other.start),
-	duration(other.duration) {}
+	end(other.end) {}
 
 AppointmentTime_t& AppointmentTime_t::operator =(const AppointmentTime_t& rhs) {
 	if (this != &rhs) {
 		this->start = rhs.start;
-		this->duration = rhs.duration;
+		this->end = rhs.end;
 	}
 	return *this;
 }
 
-bool AppointmentTime_t::operator <(const AppointmentTime_t& rhs) const {
-	return start + duration <= rhs.start;
-}
-
 int AppointmentTime_t::getDay() const {
-	return start / day_u;
+	return 1 + start / day_u;
 }
 
-int AppointmentTime_t::getHour() const {
+int AppointmentTime_t::getStartHour() const {
 	return (start % day_u) / hour_u;
 }
 
-int AppointmentTime_t::getMinutes() const {
+int AppointmentTime_t::getStartMinutes() const {
 	return start % hour_u;
 }
 
+int AppointmentTime_t::getEndHour() const {
+	return (end % day_u) / hour_u;
+}
+
+int AppointmentTime_t::getEndMinutes() const {
+	return end % hour_u;
+}
+
 int AppointmentTime_t::getDuration() const {
-	return duration;
+	return end - start;
 }
 
 

@@ -1,9 +1,9 @@
 #ifndef _DAY_T_H
 #define _DAY_T_H
 #include <map>
-#include "Appointment_t.h"
 
 using namespace std;
+class Appointment_t;
 class Appointment_t;
 
 class Day_t{
@@ -23,4 +23,3 @@ private:
 };
 
 #endif
-''

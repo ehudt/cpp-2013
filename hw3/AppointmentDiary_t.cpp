@@ -16,6 +16,10 @@ inline bool AppointmentDiary_t::Add(const Appointment_t& appointment) {
 	return result.second;
 }
 
+AppointmentDiary_t::AppointmentDiary_t() { }
+
+AppointmentDiary_t::~AppointmentDiary_t() { }
+
 inline bool AppointmentDiary_t::Remove(const Appointment_t& appointment) {
 
 }
@@ -26,4 +30,11 @@ inline Appointment_t& AppointmentDiary_t::Get(
 
 inline bool AppointmentDiary_t::Reschedule(Appointment_t& appointment,
 		AppointmentTime_t& new_time) {
+}
+
+AppointmentDiary_t::AppointmentDiary_t(const AppointmentDiary_t& other) {
+}
+
+AppointmentDiary_t& AppointmentDiary_t::operator =(
+		const AppointmentDiary_t& rhs) {
 }
