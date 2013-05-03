@@ -1,6 +1,8 @@
 #include <assert.h>
 #include <iostream>
 
+#include "AppointmentTime_t.h"
+
 using namespace std;
 
 class AppointmentTime_t;

@@ -1,9 +1,14 @@
 #ifndef _APPOINTMENTTIME_T_H
 #define _APPOINTMENTTIME_T_H
 
+#include <iostream>
+using namespace std;
+
 #include "DiaryError.h"
 
 class AppointmentTime_t{
+	friend ostream& operator << (ostream& os, const AppointmentTime_t& time);
+
 public:
 	AppointmentTime_t(int day, int start_hour, int start_minutes,
 			int end_hour, int end_minutes) throw (DiaryError);

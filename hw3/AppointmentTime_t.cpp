@@ -78,4 +78,22 @@ int AppointmentTime_t::getDuration() const {
 	return end - start;
 }
 
+const char* day[] = { "",
+		"Sun ",
+		"Mon ",
+		"Tue ",
+		"Wed ",
+		"Thu ",
+		"Fri ",
+		"Sat ",
+};
 
+ostream& operator << (ostream& os, const AppointmentTime_t& time) {
+	return os << day[time.getDay()]
+	            << time.getStartHour() << ":"
+	            << (time.getStartMinutes() == 0 < 10 ? "0" : "")
+	            << time.getStartMinutes() << "-"
+	            << time.getEndHour() << ":"
+	            << (time.getEndMinutes() == 0 < 10 ? "0" : "")
+	            << time.getEndMinutes();
+}
