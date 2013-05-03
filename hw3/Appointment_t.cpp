@@ -39,7 +39,8 @@ const string& Appointment_t::getSubject() const{
 }
 
 ostream& operator <<(ostream& os, const Appointment_t& appointment) {
-	os << "Subject: " << appointment.getSubject() << endl;
+	string sub = appointment.getSubject();
+	os << sub << endl;
 	return os << "Time: " << appointment.getTime() << endl;
 }
 
