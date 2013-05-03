@@ -4,21 +4,22 @@
 #include "Appointment_t.h"
 
 using namespace std;
-
+class Appointment_t;
 
 class Day_t{
 public:
-	Day_t();
-	~Day_t();
+	Day_t(int day);
+	virtual ~Day_t();
 
-	const Day_t& operator= (const Day_t& day);
-
-	const map<AppointmentTime_t, Appointment_t> getMeetings() const;
+	bool addAppointment(const Appointment_t& appointment);
+	bool removeAppointment(Appointment_t& appointment);
+	const Appointment_t& getAppointment(AppointmentTime_t& time) const;
 
 private:
+	Day_t(const Day_t& other);
+	Day_t& operator= (const Day_t& day);
 	map<AppointmentTime_t, Appointment_t> appointments;
 	int day;
-
 };
 
 #endif
