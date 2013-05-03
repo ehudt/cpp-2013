@@ -22,7 +22,7 @@ public:
 	virtual bool Remove(const Appointment_t& appointment);
 	// Get an appointment form the diary. rturns NULL if no such appointment exists
 	virtual const Appointment_t* Get(const AppointmentTime_t& time) const;
-	virtual const Appointment_t* Get(int start_hour, int start_minutes) const;
+	virtual const Appointment_t* Get(int day, int start_hour, int start_minutes) const;
 	virtual bool Reschedule(Appointment_t& appointment, AppointmentTime_t& new_time);
 
 private:
