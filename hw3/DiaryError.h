@@ -10,7 +10,6 @@
 
 enum DiaryError {
 	InvalidTime,
-	MeetingPassesMidnight,
 };
 
 
