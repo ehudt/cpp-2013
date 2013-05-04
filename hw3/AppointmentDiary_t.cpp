@@ -2,63 +2,47 @@
 #include <sstream>
 
 inline bool AppointmentDiary_t::Add(const Appointment_t& appointment) {
-	Schedule_t::iterator it = schedule.find(appointment.getTime());
-	if (it != schedule.end()) {
-		return false;
-	}
-	pair<Schedule_t::iterator, bool> result =
-			schedule.insert(pair<AppointmentTime_t, Appointment_t>
-								(appointment.getTime(), appointment));
-	return result.second;
+	int day = appointment.getTime().getDay() - 1;
+	return days[day]->Add(appointment);
 }
 
-AppointmentDiary_t::AppointmentDiary_t() { }
+AppointmentDiary_t::AppointmentDiary_t() {
+	for (int i = 1; i <= 7; ++i) {
+		days[i-1] = new Day_t(i);
+	}
+}
 
-AppointmentDiary_t::~AppointmentDiary_t() { }
+AppointmentDiary_t::~AppointmentDiary_t() {
+	for (int i = 1; i <= 7; ++i) {
+		delete days[i-1];
+	}
+}
 
 inline bool AppointmentDiary_t::Remove(const Appointment_t& appointment) {
-	Schedule_t::iterator it = schedule.find(appointment.getTime());
-	if (it == schedule.end() || it->second != appointment) {
-		return false;
-	}
-	schedule.erase(it);
-	return true;
+	int day = appointment.getTime().getDay() - 1;
+	return days[day]->Remove(appointment);
 }
 
 inline const Appointment_t* AppointmentDiary_t::Get(
 		const AppointmentTime_t& time) const {
-	Schedule_t::const_iterator it = schedule.find(time);
-	if (it == schedule.end()) {
-		return 0;
-	}
-	return &(it->second);
+	int day = time.getDay() - 1;
+	return days[day]->Get(time);
 }
 
 const Appointment_t* AppointmentDiary_t::Get(int day, int start_hour,
 		int start_minutes) const {
-	try {
-		AppointmentTime_t tmp_time(day, start_hour, start_minutes, 1);
-		const Appointment_t* app_p = Get(tmp_time);
-		if (!app_p) return 0;
-		const AppointmentTime_t& app_time = app_p->getTime();
-		if (app_time.getStartHour() != start_hour
-				|| app_time.getStartMinutes() != start_minutes) {
-			return 0;
-		}
-		return app_p;
-	} catch (DiaryError& ex) {
-		return 0;
-	}
+	return days[day-1]->Get(start_hour, start_minutes);
 }
 
 inline bool AppointmentDiary_t::Reschedule(const Appointment_t& appointment,
 		const AppointmentTime_t& new_time) {
 	// Make sure that the appointment is indeed in the schedule
-	Schedule_t::iterator it = schedule.find(appointment.getTime());
-	if (it == schedule.end() || it->second != appointment) {
+	//Schedule_t::iterator it = schedule.find(appointment.getTime());
+	Appointment_t* find_app = (Appointment_t *) Get(appointment.getTime());
+	if (!find_app || *find_app != appointment) {
 		return false;
 	}
-	Appointment_t reschedule_appointment = it->second;
+	Appointment_t& reschedule_appointment = *find_app;
 	const Appointment_t* tmp = Get(new_time);
 	if (tmp && *tmp != appointment) {
 		return false;
@@ -89,7 +73,7 @@ static string MakeHeader() {
 }
 
 ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
-
+/*
 	// Output diary header
 	string header = MakeHeader();
 	os << header;
@@ -177,6 +161,6 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 
 
 	//string			day_str[7];
-
+*/
 	return os;
 }
