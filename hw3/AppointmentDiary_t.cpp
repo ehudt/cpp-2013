@@ -148,6 +148,7 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 					stream << endl;
 				}
 			}
+			prev_hour = start_hour;
 			int needed_lines = 0;
 			for (int i = start_hour; i < start_hour + hour_span; ++i) {
 				needed_lines += hour_lines[i];
@@ -160,12 +161,13 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 
 			for (string::const_iterator c = app_str.begin();
 					c != app_str.end(); ++c) {
-				stream << *c;
-				char_count++;
-				if (char_count % column_width == 0) {
+				if (char_count && char_count % column_width == 0) {
 					stream << endl;
 					needed_lines--;
 				}
+				stream << *c;
+				char_count++;
+
 			}
 			stream << endl;
 			needed_lines--;
@@ -192,6 +194,7 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 	os << left;
 	bool ended = false;
 	while(!ended) {
+		os << '|';
 		for (int i = 0; i <= 7; ++i) {
 			if (str_it[i] == column_str[i].end()) {
 				ended = true;
@@ -210,5 +213,6 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 		}
 		os << endl;
 	}
+	os << setfill('-') << setw(screen_width) << "" << endl;
 	return os;
 }
