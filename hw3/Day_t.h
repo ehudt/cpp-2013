@@ -10,8 +10,8 @@ class Day_t{
 public:
 	Day_t(int day);
 	virtual ~Day_t();
-	Day_t(const Day_t& other);
-	Day_t& operator= (const Day_t& day);
+	//Day_t(const Day_t& other);
+	//Day_t& operator= (const Day_t& day);
 
 	virtual bool add(const Appointment_t& appointment);
 	virtual bool remove(Appointment_t& appointment);
