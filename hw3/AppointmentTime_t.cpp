@@ -79,7 +79,7 @@ int AppointmentTime_t::getEndMinutes() const {
 
 AppointmentTime_t::AppointmentTime_t(int day, int start_hour, int start_minutes,
 		int duration_in_minutes) throw (DiaryError) {
-	int start_time = getTimeInMinutes;
+	int start_time = getTimeInMinutes(day, start_hour, start_minutes);
 	if (start_time < 0) throw InvalidTime;
 	int end_time = start_time + duration_in_minutes;
 	if (day < 1 + end_time / day_u) throw TwoDayMeeting;
