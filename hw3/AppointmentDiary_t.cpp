@@ -73,54 +73,48 @@ static string MakeHeader() {
 }
 
 ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
-/*
 	// Output diary header
 	string header = MakeHeader();
 	os << header;
 
 	// Calculate how many lines each day needs
 	int hour_lines[24] = {0};
-	int current_day = 1;
 	//int current_lines = 0;
 	int current_day_lines[24] = {0};
-	for (Schedule_t::const_iterator it = diary.schedule.begin();
-			it != diary.schedule.end(); ++it) {
-		const Appointment_t& appointment = it->second;
-		const AppointmentTime_t time = appointment.getTime();
-		//const string& subject = appointment.getSubject();
 
-		ostringstream appointment_sstream;
-		appointment_sstream << appointment;
-		const string& app_str = appointment_sstream.str();
+	for (int current_day = 1; current_day <= 7; ++current_day) {
+		Day_t& day = *diary.days[current_day-1];
 
-		// If the day changed, flush the previous day's line count
-		if(time.getDay() > current_day) {
-			for (int i = 0; i < 24; ++i) {
-				hour_lines[i] = max(current_day_lines[i], hour_lines[i]);
-				current_day_lines[i] = 0;
+		for (Schedule_t::const_iterator it = day.schedule.begin();
+					it != day.schedule.end(); ++it) {
+			const Appointment_t& appointment = it->second;
+			const AppointmentTime_t time = appointment.getTime();
+			//const string& subject = appointment.getSubject();
+
+			ostringstream appointment_sstream;
+			appointment_sstream << appointment;
+			const string& app_str = appointment_sstream.str();
+
+			int start_hour = time.getStartHour();
+			int hour_span = time.getEndHour() - time.getStartHour()
+					+ (time.getEndMinutes() > 0 ? 1 : 0);
+			int lines_for_subject = 1 + app_str.length() / column_width;
+			int lines_per_hour = lines_for_subject / hour_span;
+			for (int i = start_hour; i < start_hour + hour_span; ++i ) {
+				current_day_lines[i] += lines_per_hour;
 			}
-			current_day = time.getDay();
+			//hour_lines[appointment.getTime().getStartHour()] += appointment.getSubject().length() / column_width;
 		}
-
-		int start_hour = time.getStartHour();
-		int hour_span = time.getEndHour() - time.getStartHour()
-				+ (time.getEndMinutes() > 0 ? 1 : 0);
-		int lines_for_subject = 1 + app_str.length() / column_width;
-		int lines_per_hour = lines_for_subject / hour_span;
-		for (int i = start_hour; i < start_hour + hour_span; ++i ) {
-			current_day_lines[i] += lines_per_hour;
+		// Flush the day's results into the main array
+		for (int i = 0; i < 24; ++i) {
+			hour_lines[i] = max(current_day_lines[i], hour_lines[i]);
+			current_day_lines[i] = 0;
 		}
-		//hour_lines[appointment.getTime().getStartHour()] += appointment.getSubject().length() / column_width;
-	}
-	// Flush last day
-	for (int i = 0; i < 24; ++i) {
-		hour_lines[i] = max(current_day_lines[i], hour_lines[i]);
-		current_day_lines[i] = 0;
 	}
 
 	ostringstream hours;
 	for (int i = 0; i < 24; ++i) {
-		//if (hour_lines[i] == 0) continue;
+		if (hour_lines[i] == 0) continue;
 		int lines = max(2, hour_lines[i]);
 		ostringstream int_to_str;
 		int_to_str << i;
@@ -135,32 +129,86 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 		hours << setfill('-') << setw(hour_fill) << "" << endl;
 	}
 	string hours_str = hours.str();
-	os << hours_str;
-	//ostringstream day_stream[7];
 
-	// TODO this is not good yet
-//	for (Schedule_t::const_iterator it = diary.schedule.begin();
-//			it != diary.schedule.end(); ++it) {
-//		const Appointment_t& appointment = it->second;
-//		const AppointmentTime_t time = appointment.getTime();
-//		int day = time.getDay() - 1;
-//
-//		ostringstream appointment_sstream;
-//		appointment_sstream << appointment;
-//		const string& app_str = appointment_sstream.str();
-//
-//		int chars_left = column_width;
-//		for (string::const_iterator c = app_str.start();
-//				c != app_str.end(); ++c) {
-//			day_stream
-//		}
-//
-//
-//	}
+	ostringstream day_stream[7];
 
+	for (int current_day = 1; current_day <= 7; ++current_day) {
+		Day_t& day = *diary.days[current_day-1];
+		int prev_hour = -1;
+		for (Schedule_t::const_iterator it = day.schedule.begin();
+				it != day.schedule.end(); ++it) {
+			const Appointment_t& appointment = it->second;
+			const AppointmentTime_t time = appointment.getTime();
+			int start_hour = time.getStartHour();
+			int hour_span = time.getEndHour() - time.getStartHour()
+										+ (time.getEndMinutes() > 0 ? 1 : 0);
+			ostringstream& stream = day_stream[current_day-1];
+			for (int i = prev_hour + 1; i < start_hour; ++i) {
+				for (int j = 0; j < hour_lines[i]; ++j) {
+					stream << endl;
+				}
+			}
+			int needed_lines = 0;
+			for (int i = start_hour; i < start_hour + hour_span; ++i) {
+				needed_lines += hour_lines[i];
+			}
+			ostringstream appointment_sstream;
+			appointment_sstream << appointment;
+			const string& app_str = appointment_sstream.str();
 
+			int char_count = 0;
 
-	//string			day_str[7];
-*/
+			for (string::const_iterator c = app_str.begin();
+					c != app_str.end(); ++c) {
+				stream << *c;
+				char_count++;
+				if (char_count % column_width == 0) {
+					stream << endl;
+					needed_lines--;
+				}
+			}
+			stream << endl;
+			needed_lines--;
+			stream << setfill('-') << setw(column_width) << "" << endl;
+			needed_lines--;
+			if (hour_span > 1) {
+				for (int i = 0; i < needed_lines; ++i) {
+					stream << endl;
+				}
+				needed_lines = 0;
+			}
+		}
+	}
+
+	string column_str[8];
+	string::const_iterator str_it[8];
+	column_str[0] = hours_str;
+	str_it[0] = column_str[0].begin();
+	for (int i = 1; i <= 7; ++i) {
+		column_str[i] = (day_stream[i-1].str());
+		str_it[i] = column_str[i].begin();
+	}
+
+	os << left;
+	bool ended = false;
+	while(!ended) {
+		for (int i = 0; i <= 7; ++i) {
+			if (str_it[i] == column_str[i].end()) {
+				ended = true;
+				os << setfill(' ') << setw(i ? column_width : hour_fill) << "" << '|';
+				continue;
+			}
+			ended = false;
+			ostringstream tmp;
+			while (*str_it[i] != '\n' && str_it[i] != column_str[i].end()) {
+				tmp << *str_it[i];
+				++(str_it[i]);
+			}
+			++(str_it[i]);
+			os << setfill(' ') << setw(i ? column_width : hour_fill) << tmp.str() << '|';
+
+		}
+		os << endl;
+	}
 	return os;
 }
