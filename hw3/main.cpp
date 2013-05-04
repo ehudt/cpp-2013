@@ -32,7 +32,8 @@ int main(void) {
 	cout << "Welcome to your Appointment Diary:" << endl;
 
 	while (cont) {
-		cout << "	0: insert" 				<< endl
+		cout 	<< "	What would you like to do?" << endl
+				<< "	0: insert" 				<< endl
 				<< "	1: find" 				<< endl
 				<< "	2: remove" 				<< endl
 				<< "	3: reschedule"			<< endl
@@ -74,7 +75,7 @@ int main(void) {
 			Appointment_t appointment(time, subject);
 			success = appdiar.Add(appointment);
 
-			cout << "Adding the appointment " << (success ? "succeeded." : "failed.") << endl;
+			cout << "Adding the appointment " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
 		}
 
@@ -89,7 +90,7 @@ int main(void) {
 			}
 
 			const Appointment_t* t = appdiar.Get(day, start_hour, start_minutes);
-			cout << "Finding the appointment " << (t ? "succeeded." : "failed. No appointment at this time.") << endl;
+			cout << "Finding the appointment " << (t ? "succeeded." : "failed. No appointment at this time.") << endl << endl;
 			break;
 		}
 
@@ -97,7 +98,7 @@ int main(void) {
 			cout << "Enter day, start hour(0-23) and minutes(0-59) of the appointment to remove: ";
 			cin >> day >> start_hour >> start_minutes;
 			if (!cin.good()) {
-				cout << "Invalid input" << endl;
+				cout << "Invalid input" << endl << endl;
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				break;
@@ -110,7 +111,7 @@ int main(void) {
 			else{
 				success = appdiar.Remove(*a);
 			}
-			cout << "Appointmert removal" << (success ? "succeeded." : "failed.") << endl;
+			cout << "Appointment removal " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
 		}
 
@@ -125,10 +126,19 @@ int main(void) {
 			}
 
 			const Appointment_t* a = appdiar.Get(day, start_hour, start_minutes);
+
+			cout << "Enter day, start hour and minutes for the appointment new time: " << endl;
+						cin >> day >> start_hour >> start_minutes;
+						if (!cin.good()) {
+							cout << "Invalid input" << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+							break;
+						}
 			const AppointmentTime_t newTime(day, start_hour, start_minutes, a->getTime().getDuration());
 			success = appdiar.Reschedule(*a, newTime);
 
-			cout << "Rescheduling " << (success ? "succeeded." : "failed.") << endl;
+			cout << "Rescheduling " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
 		}
 
