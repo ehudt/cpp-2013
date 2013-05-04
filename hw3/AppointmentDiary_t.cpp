@@ -115,7 +115,8 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 	ostringstream hours;
 	for (int i = 0; i < 24; ++i) {
 		if (hour_lines[i] == 0) continue;
-		int lines = max(2, hour_lines[i]);
+		hour_lines[i] = max(2, hour_lines[i]);
+		int lines = hour_lines[i];
 		ostringstream int_to_str;
 		int_to_str << i;
 		string hour(int_to_str.str());
@@ -194,14 +195,15 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 	os << left;
 	bool ended = false;
 	while(!ended) {
+		ended = true;
 		os << '|';
 		for (int i = 0; i <= 7; ++i) {
 			if (str_it[i] == column_str[i].end()) {
-				ended = true;
+				ended &= true;
 				os << setfill(' ') << setw(i ? column_width : hour_fill) << "" << '|';
 				continue;
 			}
-			ended = false;
+			ended &= false;
 			ostringstream tmp;
 			while (*str_it[i] != '\n' && str_it[i] != column_str[i].end()) {
 				tmp << *str_it[i];

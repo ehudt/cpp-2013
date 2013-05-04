@@ -6,6 +6,7 @@ Day_t::Day_t(int day) :
 Day_t::~Day_t() {}
 
 bool Day_t::Add(const Appointment_t& appointment) {
+	if (day != appointment.getTime().getDay()) return false;
 	Schedule_t::iterator it = schedule.find(appointment.getTime());
 	if (it != schedule.end()) {
 		return false;
