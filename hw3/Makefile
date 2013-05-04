@@ -1,17 +1,20 @@
 CC = g++
 CFLAGS = -Wall -Wextra -g
 
-all : main.o AppointmentTime_t.o Appointment_t.o Day_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTest.o AppointmentTimeTest.o 
-	${CC} ${CFLAGS} main.o AppointmentTime_t.o Appointment_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTest.o AppointmentTimeTest.o Day_t.o -o diary
+all : main.o AppointmentTime_t.o Appointment_t.o Day_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTest.o AppointmentTimeTest.o DayTest.o 
+	${CC} ${CFLAGS} main.o AppointmentTime_t.o Appointment_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTest.o AppointmentTimeTest.o Day_t.o DayTest.o -o diary
 
 clean :
-	rm -f main.o AppointmentTime_t.o Appointment_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTimeTest.o AppointmentTest.o
+	rm -f main.o AppointmentTime_t.o Appointment_t.o AppointmentDiary_t.o AppointmentDiaryTest.o AppointmentTimeTest.o AppointmentTest.o DayTest.o Day_t.o
 
 AppointmentTimeTest.o : AppointmentTime_t.h
 	${CC} ${CFLAGS} -c AppointmentTimeTest.cpp
 
 AppointmentTest.o : Appointment_t.h AppointmentTime_t.h
 	${CC} ${CFLAGS} -c AppointmentTest.cpp
+	
+DayTest.o : Day_t.h Appointment_t.h AppointmentTime_t.h
+	${CC} ${CFLAGS} -c DayTest.cpp
 
 AppointmentDiaryTest.o : AppointmentDiary_t.h AppointmentTime_t.h Appointment_t.h
 	${CC} ${CFLAGS} -c AppointmentDiaryTest.cpp
