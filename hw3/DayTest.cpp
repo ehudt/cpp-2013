@@ -21,7 +21,7 @@ void DayTest() {
 	assert(day.Add(a1));
 	assert(day.Get(a1.getTime()));
 	assert(day.Remove(a1));
-	//assert(!day.Add(a2));
-	//assert(!day.Get(a2.getTime()));
-	//assert(!day.Remove(a2));
+	assert(!day.Add(a2));
+	assert(!day.Get(a2.getTime()));
+	assert(!day.Remove(a2));
 }
