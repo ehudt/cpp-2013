@@ -38,9 +38,9 @@ const Appointment_t* AppointmentDiary_t::Get(int day, int start_hour,
 		int start_minutes) const {
 	try {
 		AppointmentTime_t tmp_time(day, start_hour, start_minutes, 1);
-		Appointment_t* app_p = Get(tmp_time);
+		const Appointment_t* app_p = Get(tmp_time);
 		if (!app_p) return 0;
-		AppointmentTime_t& app_time = app_p->getTime();
+		const AppointmentTime_t& app_time = app_p->getTime();
 		if (app_time.getStartHour() != start_hour
 				|| app_time.getStartMinutes() != start_minutes) {
 			return 0;

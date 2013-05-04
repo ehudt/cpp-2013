@@ -9,7 +9,7 @@ void AppointmentTest() {
 	AppointmentTime_t t1(1, 8, 30, 11, 30);
 	AppointmentTime_t t2(2, 10, 30, 11, 0);
 
-	string s1("Watch the paint dry");
+	string s1("Doing stuff	");
 
 	Appointment_t a1(t1, s1);
 	assert(a1.getTime() == t1);

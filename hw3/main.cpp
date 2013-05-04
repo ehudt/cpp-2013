@@ -49,7 +49,7 @@ int main(void) {
 
 		int day, start_hour, end_hour, start_minutes, end_minutes;
 		string subject;
-		bool success, result;
+		bool success;
 		switch (c) {
 		case 0:{
 			cout << "Enter day for new appointment (1-7): " << endl;
@@ -73,6 +73,8 @@ int main(void) {
 			AppointmentTime_t time(day, start_hour, start_minutes, end_hour, end_minutes);
 			Appointment_t appointment(time, subject);
 			success = appdiar.Add(appointment);
+
+			cout << "Adding the appointment " << (success ? "succeeded." : "failed.") << endl;
 			break;
 		}
 
@@ -123,7 +125,7 @@ int main(void) {
 			}
 
 			const Appointment_t* a = appdiar.Get(day, start_hour, start_minutes);
-			AppointmentTime_t newTime(day, start_hour, start_minutes, a->getTime().getDuration());
+			const AppointmentTime_t newTime(day, start_hour, start_minutes, a->getTime().getDuration());
 			success = appdiar.Reschedule(*a, newTime);
 
 			cout << "Rescheduling " << (success ? "succeeded." : "failed.") << endl;
