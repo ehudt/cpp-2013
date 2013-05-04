@@ -111,10 +111,19 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 			current_day_lines[i] = 0;
 		}
 	}
-
+	int first_hour = -1, last_hour = 24;
+	for (int i = 0; i < 24; ++i) {
+		if (first_hour == -1 && hour_lines[i]) {
+			first_hour = i;
+		}
+		if (last_hour == 24 && hour_lines[23-i]) {
+			last_hour = 23-i;
+		}
+	}
+	if (first_hour == -1) return os;
 	ostringstream hours;
 	for (int i = 0; i < 24; ++i) {
-		if (hour_lines[i] == 0) continue;
+		if (i < first_hour || i > last_hour) continue;
 		hour_lines[i] = max(2, hour_lines[i]);
 		int lines = hour_lines[i];
 		ostringstream int_to_str;
@@ -144,10 +153,13 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 			int hour_span = time.getEndHour() - time.getStartHour()
 										+ (time.getEndMinutes() > 0 ? 1 : 0);
 			ostringstream& stream = day_stream[current_day-1];
-			for (int i = prev_hour + 1; i < start_hour; ++i) {
+			for (int i = prev_hour + 1; i < start_hour - 1; ++i) {
 				for (int j = 0; j < hour_lines[i]; ++j) {
 					stream << endl;
 				}
+			}
+			if (prev_hour > -1 && prev_hour + 1 < start_hour) {
+				stream << setfill('-') << setw(column_width) << "" << endl;
 			}
 			prev_hour = start_hour;
 			int needed_lines = 0;
