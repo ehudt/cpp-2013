@@ -9,10 +9,11 @@
 
 #include "AppointmentTime_t.h"
 #include "Appointment_t.h"
+#include "Day_t.h"
+
+class Day_t;
 
 using namespace std;
-
-typedef map<AppointmentTime_t, Appointment_t, less<AppointmentTime_t> > Schedule_t;
 
 class AppointmentDiary_t {
 	friend ostream& operator << (ostream& os, const AppointmentDiary_t& diary);
@@ -20,6 +21,8 @@ class AppointmentDiary_t {
 public:
 	AppointmentDiary_t();
 	virtual ~AppointmentDiary_t();
+	// AppointmentDiary_t(const AppointmentDiary_t& other);
+	// AppointmentDiary_t& operator =(const AppointmentDiary_t& rhs);
 	virtual bool Add(const Appointment_t& appointment);
 	virtual bool Remove(const Appointment_t& appointment);
 	// Get an appointment form the diary. returns NULL if no such appointment exists
@@ -28,9 +31,7 @@ public:
 	virtual bool Reschedule(const Appointment_t& appointment, const AppointmentTime_t& new_time);
 
 private:
-	AppointmentDiary_t(const AppointmentDiary_t& other); // Can't copy Diary
-	AppointmentDiary_t& operator =(const AppointmentDiary_t& rhs); // Can't copy Diary
-	Schedule_t schedule;
+	Day_t* days[7];
 };
 
 
