@@ -22,10 +22,10 @@ public:
 	virtual ~AppointmentDiary_t();
 	virtual bool Add(const Appointment_t& appointment);
 	virtual bool Remove(const Appointment_t& appointment);
-	// Get an appointment form the diary. rturns NULL if no such appointment exists
+	// Get an appointment form the diary. returns NULL if no such appointment exists
 	virtual const Appointment_t* Get(const AppointmentTime_t& time) const;
 	virtual const Appointment_t* Get(int day, int start_hour, int start_minutes) const;
-	virtual bool Reschedule(Appointment_t& appointment, AppointmentTime_t& new_time);
+	virtual bool Reschedule(const Appointment_t& appointment, const AppointmentTime_t& new_time);
 
 private:
 	AppointmentDiary_t(const AppointmentDiary_t& other); // Can't copy Diary

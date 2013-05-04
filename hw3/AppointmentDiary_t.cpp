@@ -51,21 +51,21 @@ const Appointment_t* AppointmentDiary_t::Get(int day, int start_hour,
 	}
 }
 
-inline bool AppointmentDiary_t::Reschedule(Appointment_t& appointment,
-		AppointmentTime_t& new_time) {
+inline bool AppointmentDiary_t::Reschedule(const Appointment_t& appointment,
+		const AppointmentTime_t& new_time) {
 	// Make sure that the appointment is indeed in the schedule
 	Schedule_t::iterator it = schedule.find(appointment.getTime());
 	if (it == schedule.end() || it->second != appointment) {
 		return false;
 	}
+	Appointment_t reschedule_appointment = it->second;
 	const Appointment_t* tmp = Get(new_time);
 	if (tmp && *tmp != appointment) {
 		return false;
 	}
-
 	Remove(appointment);
-	appointment.setTime(new_time);
-	Add(appointment);
+	reschedule_appointment.setTime(new_time);
+	Add(reschedule_appointment);
 	return true;
 }
 
