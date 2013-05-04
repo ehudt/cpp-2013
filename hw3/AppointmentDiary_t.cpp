@@ -132,7 +132,7 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 		string min(":00");
 		hours << setfill(' ') << setw(hour_fill) << hour+min << endl;
 		lines--;
-		while(lines > 1) {
+		while(lines > 0) {
 			hours << endl;
 			lines--;
 		}
@@ -158,7 +158,7 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 					stream << endl;
 				}
 			}
-			if (prev_hour > -1 && prev_hour + 1 < start_hour) {
+			if (prev_hour > -1 && prev_hour < start_hour) {
 				stream << setfill('-') << setw(column_width) << "" << endl;
 			}
 			prev_hour = start_hour;
@@ -184,14 +184,12 @@ ostream& operator << (ostream& os, const AppointmentDiary_t& diary) {
 			}
 			stream << endl;
 			needed_lines--;
+			for (int i = 0; i < needed_lines - 1; ++i) {
+				stream << endl;
+			}
+			needed_lines = 1;
 			stream << setfill('-') << setw(column_width) << "" << endl;
 			needed_lines--;
-			if (hour_span > 1) {
-				for (int i = 0; i < needed_lines; ++i) {
-					stream << endl;
-				}
-				needed_lines = 0;
-			}
 		}
 	}
 
