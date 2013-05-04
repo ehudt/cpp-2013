@@ -64,37 +64,36 @@ void AppointmentTimeTest() {
 	assert(!(app2 < app6) && !(app6 < app2));
 
 	// Test CTOR
-	AppointmentTime_t* app = 0;
 	bool caught = false;
-	try { app = new AppointmentTime_t(0, 4, 50, 5, 0); }
+	try { new AppointmentTime_t(0, 4, 50, 5, 0); }
 	catch (DiaryError& ex) {
 		if (ex == InvalidTime) caught = true;
 	}
 	assert(caught);
 
 	caught = false;
-	try { app = new AppointmentTime_t(7, 24, 0, 24, 10); }
+	try { new AppointmentTime_t(7, 24, 0, 24, 10); }
 	catch (DiaryError& ex) {
 		if (ex == InvalidTime) caught = true;
 	}
 	assert(caught);
 
 	caught = false;
-	try { app = new AppointmentTime_t(5, 13, 105, 14, 20); }
+	try { new AppointmentTime_t(5, 13, 105, 14, 20); }
 	catch (DiaryError& ex) {
 		if (ex == InvalidTime) caught = true;
 	}
 	assert(caught);
 
 	caught = false;
-	try { app = new AppointmentTime_t(3, 17, 30, 26, 30); }
+	try { new AppointmentTime_t(3, 17, 30, 26, 30); }
 	catch (DiaryError& ex) {
 		if (ex == InvalidTime) caught = true;
 	}
 	assert(caught);
 
 	caught = false;
-	try { app = new AppointmentTime_t(3, 17, 30, 18, 90); }
+	try { new AppointmentTime_t(3, 17, 30, 18, 90); }
 	catch (DiaryError& ex) {
 		if (ex == InvalidTime) caught = true;
 	}
