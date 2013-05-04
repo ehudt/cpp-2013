@@ -17,7 +17,7 @@ void AppointmentTimeTest() {
 	assert(app1.getEndMinutes() == 30);
 	assert(app1.getDuration() == 180);
 
-	AppointmentTime_t app2(1, 10, 30, 11, 0);
+	AppointmentTime_t app2(1, 10, 30, 30);
 	assert(app2.getDay() == 1);
 	assert(app2.getStartHour() == 10);
 	assert(app2.getStartMinutes() == 30);
@@ -26,7 +26,7 @@ void AppointmentTimeTest() {
 	assert(app2.getDuration() == 30);
 
 	AppointmentTime_t app3(3, 8, 30, 9, 30);
-	AppointmentTime_t app4(3, 8, 30, 9, 0);
+	AppointmentTime_t app4(3, 8, 30, 30);
 
 	// Test that oeprator < returns true iff 2 meetings are overlapping
 	assert(app1 == app2);

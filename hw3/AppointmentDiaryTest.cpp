@@ -25,7 +25,7 @@ void AppointmentDiaryTest() {
 	// Reschedule appointment 1 to make room for appointment 2
 	AppointmentTime_t time3(7, 8, 0, 9, 30);
 	diary.Reschedule(app1, time3);
-	const Appointment_t* tmp = diary.Get(time3);
+	const Appointment_t* tmp = diary.Get(7, 8, 0);
 	assert(tmp);
 	assert(*tmp == app1);
 	const AppointmentTime_t& tmp_time = tmp->getTime();
