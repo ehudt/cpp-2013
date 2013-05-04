@@ -9,7 +9,7 @@ using namespace std;
 #include <limits>
 
 void AppointmentDiaryTest();
-
+void DayTest();
 void AppointmentTimeTest();
 void AppointmentTest();
 
@@ -22,6 +22,8 @@ int main(void) {
 	cout << "AppointmentTest() finished successfully!" << endl;
 	AppointmentDiaryTest();
 	cout << "AppointmentDiaryTest() finished successfully!" << endl;
+	DayTest();
+	cout << "DayTest() finished successfully!" << endl;
 	cout << "All tests passed!" << endl;
 
 	bool cont	= true;			// trigger to stop loop
