@@ -1,4 +1,4 @@
-#include "Day_t.h";
+#include "Day_t.h"
 
 Day_t::Day_t(int day) :
 	day(day) {}
