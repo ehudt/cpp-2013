@@ -65,7 +65,8 @@ int main(void) {
 			cin >> end_hour >> end_minutes;
 
 			cout << "Enter subject for appointment: " << endl;
-			cin >> subject;
+			cin.get();
+			getline(cin, subject);
 
 			if (!cin.good()) {
 				cout << "Invalid input" << endl;
@@ -145,7 +146,8 @@ int main(void) {
 		}
 
 		case 4:
-			cout << appdiar;
+			cout << appdiar << endl;
+
 			break;
 
 		default:
