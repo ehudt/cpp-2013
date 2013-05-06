@@ -74,9 +74,18 @@ int main(void) {
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				break;
 			}
+
+			success = true;
+			try{
 			AppointmentTime_t time(day, start_hour, start_minutes, end_hour, end_minutes);
 			Appointment_t appointment(time, subject);
 			success = appdiar.Add(appointment);
+
+			}
+
+			catch(DiaryError &){
+				success = false;
+			}
 
 			cout << "Adding the appointment " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
@@ -138,8 +147,12 @@ int main(void) {
 							cin.ignore(numeric_limits<streamsize>::max(), '\n');
 							break;
 						}
+			try{
 			const AppointmentTime_t newTime(day, start_hour, start_minutes, a->getTime().getDuration());
 			success = appdiar.Reschedule(*a, newTime);
+			}catch(DiaryError&){
+				success = false;
+			}
 
 			cout << "Rescheduling " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
