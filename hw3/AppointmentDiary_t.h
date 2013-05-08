@@ -21,8 +21,8 @@ class AppointmentDiary_t {
 public:
 	AppointmentDiary_t();
 	virtual ~AppointmentDiary_t();
-	// AppointmentDiary_t(const AppointmentDiary_t& other);
-	// AppointmentDiary_t& operator =(const AppointmentDiary_t& rhs);
+	AppointmentDiary_t(const AppointmentDiary_t& other);
+	AppointmentDiary_t& operator =(const AppointmentDiary_t& rhs);
 	virtual bool Add(const Appointment_t& appointment);
 	virtual bool Remove(const Appointment_t& appointment);
 	// Get an appointment form the diary. returns NULL if no such appointment exists

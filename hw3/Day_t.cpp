@@ -34,6 +34,18 @@ const Appointment_t* Day_t::Get(const AppointmentTime_t& time) const {
 	return &(it->second);
 }
 
+Day_t::Day_t(const Day_t& other) :
+	day(other.day),
+	schedule(other.schedule) {}
+
+Day_t& Day_t::operator =(const Day_t& day) {
+	if (this != &day) {
+		this->day = day.day;
+		this->schedule = day.schedule;
+	}
+	return *this;
+}
+
 const Appointment_t* Day_t::Get(int start_hour, int start_minutes) const {
 	try {
 		AppointmentTime_t tmp_time(day, start_hour, start_minutes, 1);

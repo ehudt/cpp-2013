@@ -34,6 +34,23 @@ const Appointment_t* AppointmentDiary_t::Get(int day, int start_hour,
 	return days[day-1]->Get(start_hour, start_minutes);
 }
 
+AppointmentDiary_t::AppointmentDiary_t(const AppointmentDiary_t& other) {
+	for (int i = 0; i < 7; ++i) {
+		days[i] = new Day_t(*other.days[i]);
+	}
+}
+
+AppointmentDiary_t& AppointmentDiary_t::operator =(
+		const AppointmentDiary_t& rhs) {
+	if (this != &rhs) {
+		for (int i = 0; i < 7; ++i) {
+			delete days[i];
+			days[i] = new Day_t(*rhs.days[i]);
+		}
+	}
+	return *this;
+}
+
 inline bool AppointmentDiary_t::Reschedule(const Appointment_t& appointment,
 		const AppointmentTime_t& new_time) {
 	// Make sure that the appointment is indeed in the schedule
