@@ -10,6 +10,7 @@ class Book_t;
 class Borrower_t;
 
 class Library_t{
+
 public:
 	Library_t();
 	virtual ~Library_t();
@@ -23,6 +24,8 @@ public:
 	//search for a borrower in the library. Returns null if there isn't one
 	virtual Borrower_t* SearchBorrower(int id) const;
 	virtual bool RemoveBorrower(int id);
+	virtual void BookReport() const;
+	virtual void BorrowerReport() const;
 
 private:
 	// map for all the books in the library by ISBN
