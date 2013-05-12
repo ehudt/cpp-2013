@@ -18,19 +18,19 @@ public:
 	// CTOR using required fields
 	Book_t(const string ISBN, const string name, const string author,
 			int num_of_copies);
-	~Book_t();
+	virtual ~Book_t();
 
 	// Loan the book out to someone, if the book is available. Return true on success.
 	// If the book has no available copies, the function returns false and adds the
 	// borrower to the waiting list.
-	bool Loan(Borrower_t& loan_to);
+	virtual bool Loan(Borrower_t& loan_to);
 	// Return a book to the library. If the waiting list isn't empty, returning
 	// a book will loan it to the first borrower in the waiting list.
-	bool Return(Borrower_t& return_from);
+	virtual bool Return(Borrower_t& return_from);
 	// Returns whether there are available copies of the book in the library.
-	bool IsAvailable() const;
+	virtual bool IsAvailable() const;
 	// Returns whether there are copies of the book which are loaned out
-	bool IsLoaned() const;
+	virtual bool IsLoaned() const;
 
 private:
 	// Disable copying and assigning books
