@@ -9,6 +9,8 @@ using namespace std;
 
 class Book_t;
 
+typedef set<Book_t&> BookSet;
+
 class Borrower_t {
 	// Support printing operations
 	friend ostream& operator << (ostream& os, const Borrower_t& borrower);
@@ -20,22 +22,24 @@ public:
 
 	// Get user ID
 	int GetId() const;
+	// Get user name
+	const string& GetName() const;
 	// Loan a book
-	virtual bool Loan(Book_t& book);
+	virtual bool Loan(const Book_t& book);
 	// Return a book
-	virtual bool Return(Book_t& book);
+	virtual bool Return(const Book_t& book);
 
 private:
 	// Prevent copying and assigning
 	Borrower_t(const Borrower_t& other);
-	Borrower_t& operator = (const Borrower_t& rhs);
+	const Borrower_t& operator = (const Borrower_t& rhs);
 
 	// Unique borrower ID
 	int id;
 	// Borrower's name
 	string name;
 	// Set of loaned books
-	set<Book_t&> my_books;
+	BookSet my_books;
 
 	// A static data mamber for assigning IDs
 	static int id_assign;

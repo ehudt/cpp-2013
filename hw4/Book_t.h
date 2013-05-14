@@ -16,8 +16,8 @@ class Book_t {
 
 public:
 	// CTOR using required fields
-	Book_t(const string ISBN, const string name, const string author,
-			int num_of_copies);
+	Book_t(const string& isbn, const string& name, const string& author,
+			size_t num_of_copies);
 	virtual ~Book_t();
 
 	// Loan the book out to someone, if the book is available. Return true on success.
@@ -44,9 +44,9 @@ private:
 	// Book author
 	string author;
 	// # of copies of the book which are available to loan in the library
-	int available_copies;
+	size_t available_copies;
 	// # of copies that are out of the library
-	int loaned_copies;
+	size_t loaned_copies;
 	// Set of people who loaned the book
 	set<Borrower_t&> loans;
 	// Queue of people who are waiting to loan the book
