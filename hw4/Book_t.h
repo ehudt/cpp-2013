@@ -6,9 +6,6 @@
 #include <string>
 #include <iostream>
 
-#include "Borrower_t.h"
-//#include "Library_t.h"
-
 class Borrower_t;
 
 using namespace std;
@@ -27,16 +24,20 @@ public:
 	virtual ~Book_t();
 
 	// Loan the book out to someone, if the book is available. Return true on success.
-	// If the book has no available copies, the function returns false and adds the
-	// borrower to the waiting list.
+	// If the book has no available copies, the function returns false.
 	virtual bool Loan(const Borrower_t& loan_to);
-	// Return a book to the library. If the waiting list isn't empty, returning
-	// a book will loan it to the first borrower in the waiting list.
+	// Return a book to the library, if the input borrower did loan it.
 	virtual bool Return(const Borrower_t& return_from);
 	// Returns whether there are available copies of the book in the library.
 	virtual bool IsAvailable() const;
 	// Returns whether there are copies of the book which are loaned out
 	virtual bool IsLoaned() const;
+	// Add new copies of the book in the library.
+	virtual void AddCopies(size_t copies_to_add);
+	// Add and remove borrowers to the waiting list
+	virtual void AddToWaitingList(const Borrower_t& borrower);
+	virtual const Borrower_t* PopWaitingList();
+	virtual bool WaitingListEmpty() const;
 
 	const string& GetAuthor() const {
 		return author;
@@ -48,6 +49,14 @@ public:
 
 	const string& GetName() const {
 		return name;
+	}
+
+	size_t getAvailableCopies() const {
+		return available_copies;
+	}
+
+	size_t getLoanedCopies() const {
+		return loaned_copies;
 	}
 
 private:

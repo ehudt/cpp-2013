@@ -5,8 +5,6 @@
 #include <string>
 #include <iostream>
 
-#include "Book_t.h"
-
 using namespace std;
 
 class Book_t;
@@ -26,11 +24,10 @@ public:
 	int GetId() const;
 	// Get user name
 	const string& GetName() const;
-	// Loan a book. If the book is not available, the borrower is added to
-	// the book's waiting list and the function returns false.
-	virtual bool Loan(Book_t& book);
+	// Loan a book
+	virtual void Loan(const Book_t& book);
 	// Return a book. Returns false if the book wasn't loaned by the borrower.
-	virtual bool Return(Book_t& book);
+	virtual bool Return(const Book_t& book);
 	// Check if this borrower has books loaned
 	virtual bool HasLoans() const;
 

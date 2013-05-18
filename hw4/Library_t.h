@@ -23,7 +23,6 @@ public:
 	virtual bool AddBook(const string& name, const string& author,
 			const string& isbn, size_t copies);
 	virtual bool RemoveBook(Book_t& book);
-
 	//search for a book in the library. Returns null if there isn't one
 	virtual const Book_t* SearchBook(const string& isbn) const;
 
@@ -31,6 +30,11 @@ public:
 	//search for a borrower in the library. Returns null if there isn't one
 	virtual const Borrower_t* SearchBorrower(int id) const;
 	virtual bool RemoveBorrower(Borrower_t& borrower);
+
+	// Loan and return books
+	virtual bool LoanBook(Borrower_t& borrower, Book_t& book) const;
+	virtual bool ReturnBook(Borrower_t& borrower, Book_t& book) const;
+
 	virtual void BookReport() const;
 	virtual void BorrowerReport() const;
 

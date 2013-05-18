@@ -19,19 +19,28 @@ Library_t::~Library_t() {
 	}
 }
 
+static bool LoanBookToNextOnWaitingList(Book_t& book) {
+	if (!book.IsAvailable() || book.WaitingListEmpty()) return false;
+	Borrower_t& borrower = const_cast<Borrower_t&>(*(book.PopWaitingList()));
+	book.Loan(borrower);
+	borrower.Loan(book);
+	return true;
+}
+
 bool Library_t::AddBook(const string& name, const string& author,
 		const string& isbn, size_t copies) {
 	BookMap_t::const_iterator it = books.find(isbn);
 	if (it != books.end()) {
-		// The book already exists
-		return false;
-//		const Book_t& existing_book = *it->second;
-//		if (existing_book.GetName() != name
-//				|| existing_book.GetAuthor() != author
-//				|| existing_book.GetIsbn() != isbn) {
-//			return false;
-//		}
-//		const_cast<Book_t&>(existing_book).available_copies += copies;
+		Book_t& existing_book = *it->second;
+		if (existing_book.GetName() != name
+				|| existing_book.GetAuthor() != author
+				|| existing_book.GetIsbn() != isbn) {
+			return false;
+		}
+		existing_book.AddCopies(copies);
+		if (!existing_book.WaitingListEmpty()) {
+			LoanBookToNextOnWaitingList(existing_book);
+		}
 	} else {
 		Book_t* new_book = new Book_t(isbn, name, author, copies);
 		books.insert(pair<string, Book_t*>(isbn, new_book));
@@ -78,6 +87,24 @@ bool Library_t::RemoveBorrower(Borrower_t& borrower) {
 	return true;
 }
 
+bool Library_t::LoanBook(Borrower_t& borrower, Book_t& book) const {
+	if (book.IsAvailable()) {
+		book.Loan(borrower);
+		borrower.Loan(book);
+		return true;
+	}
+	book.AddToWaitingList(borrower);
+	return false;
+}
+
+bool Library_t::ReturnBook(Borrower_t& borrower, Book_t& book) const {
+	if (!borrower.Return(book) || !book.Return(borrower)) return false;
+	if (!book.WaitingListEmpty()) {
+		LoanBookToNextOnWaitingList(book);
+	}
+	return true;
+}
+
 void Library_t::BookReport() const {
 	cout << "Book report:" << endl;
 	for (BookMap_t::const_iterator it = books.begin();
@@ -92,4 +119,32 @@ void Library_t::BorrowerReport() const {
 			it != borrowers.end(); ++it) {
 		cout << *it->second << endl;
 	}
+}
+
+ostream& operator <<(ostream& os,
+		const Borrower_t& borrower) {
+	os << borrower.GetName() << " (" << borrower.GetId() << ")" << endl;
+	os << "This reader has the following books loaned to: ";
+	for (BookSet_t::const_iterator it = borrower.my_books.begin();
+			it != borrower.my_books.end(); ++it) {
+		const Book_t& book = *(*it);
+		os << book.GetAuthor() << ", " << book.GetName() << ". ISBN: " << book.GetIsbn() << endl;
+	}
+	os << endl;
+	return os;
+}
+
+ostream& operator <<(ostream& os, const Book_t& book) {
+	os << book.author << ", " << book.name << ". ISBN: " << book.isbn << endl;
+	os << "This book is loaned out to: ";
+	bool first = true;
+	for (BorrowerSet_t::const_iterator it = book.loans.begin();
+			it != book.loans.end(); ++it) {
+		if (!first) os << ", ";
+		first = false;
+		const Borrower_t& borrower = *(*it);
+		os << borrower.GetName() << " (" << borrower.GetId() << ")";
+	}
+	os << endl;
+	return os;
 }

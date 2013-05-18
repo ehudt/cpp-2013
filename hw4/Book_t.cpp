@@ -1,20 +1,5 @@
 #include "Book_t.h"
 
-ostream& operator <<(ostream& os, const Book_t& book) {
-	os << book.author << ", " << book.name << ". ISBN: " << book.isbn << endl;
-	os << "This book is loaned out to: ";
-	bool first = true;
-	for (BorrowerSet_t::const_iterator it = book.loans.begin();
-			it != book.loans.end(); ++it) {
-		if (!first) os << ", ";
-		first = false;
-		const Borrower_t& borrower = *(*it);
-		os << borrower.GetName() << " (" << borrower.GetId() << ")";
-	}
-	os << endl;
-	return os;
-}
-
 Book_t::Book_t(const string& isbn, const string& name, const string& author,
 		size_t num_of_copies) :
 			isbn(isbn),
@@ -30,15 +15,11 @@ Book_t::~Book_t() {
 }
 
 bool Book_t::Loan(const Borrower_t& loan_to) {
-	if (available_copies != 0) {
-		available_copies--;
-		loaned_copies++;
-		loans.insert(&loan_to);
-		return true;
-	} else {
-		waiting_list.push(&loan_to);
-		return false;
-	}
+	if (available_copies == 0) return false;
+	available_copies--;
+	loaned_copies++;
+	loans.insert(&loan_to);
+	return true;
 }
 
 bool Book_t::Return(const Borrower_t& return_from) {
@@ -49,12 +30,6 @@ bool Book_t::Return(const Borrower_t& return_from) {
 	loans.erase(&return_from);
 	available_copies++;
 	loaned_copies--;
-	// Check the waiting list
-	if (!waiting_list.empty()) {
-		Borrower_t* next_loan = const_cast<Borrower_t*>(waiting_list.front());
-		waiting_list.pop();
-		next_loan->Loan(*this);
-	}
 	return true;
 }
 
@@ -64,4 +39,23 @@ bool Book_t::IsAvailable() const {
 
 bool Book_t::IsLoaned() const {
 	return loaned_copies != 0;
+}
+
+void Book_t::AddCopies(size_t copies_to_add) {
+	available_copies += copies_to_add;
+}
+
+void Book_t::AddToWaitingList(const Borrower_t& borrower) {
+	waiting_list.push(&borrower);
+}
+
+const Borrower_t* Book_t::PopWaitingList() {
+	if (WaitingListEmpty()) return 0;
+	const Borrower_t* borrower = waiting_list.front();
+	waiting_list.pop();
+	return borrower;
+}
+
+bool Book_t::WaitingListEmpty() const {
+	return waiting_list.empty();
 }
