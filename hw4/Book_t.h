@@ -26,9 +26,6 @@ public:
 			size_t num_of_copies);
 	virtual ~Book_t();
 
-	// Operator < (less) for STL set
-	bool operator < (Book_t& rhs) const;
-
 	// Loan the book out to someone, if the book is available. Return true on success.
 	// If the book has no available copies, the function returns false and adds the
 	// borrower to the waiting list.

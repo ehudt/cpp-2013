@@ -63,10 +63,6 @@ bool Book_t::IsAvailable() const {
 	return available_copies != 0;
 }
 
-bool Book_t::operator <(Book_t& rhs) const {
-	return name < rhs.name;
-}
-
 bool Book_t::IsLoaned() const {
 	return loaned_copies != 0;
 }

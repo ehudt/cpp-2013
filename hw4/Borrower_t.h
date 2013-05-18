@@ -22,9 +22,6 @@ public:
 	Borrower_t(string name);
 	virtual ~Borrower_t();
 
-	// Operator < (less) for STL set
-	bool operator < (Borrower_t& rhs) const;
-
 	// Get user ID
 	int GetId() const;
 	// Get user name

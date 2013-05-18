@@ -25,10 +25,6 @@ Borrower_t::~Borrower_t() {
 	// Empty
 }
 
-bool Borrower_t::operator <(Borrower_t& rhs) const {
-	return id < rhs.id;
-}
-
 int Borrower_t::GetId() const {
 	return id;
 }
