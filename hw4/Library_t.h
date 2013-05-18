@@ -4,34 +4,41 @@
 #include <map>
 #include <string>
 
-using namespace std;
+#include "Book_t.h"
+#include "Borrower_t.h"
 
 class Book_t;
 class Borrower_t;
+
+using namespace std;
+
+typedef map<string, Book_t*> BookMap_t;
+typedef map<int, Borrower_t*> BorrowerMap_t;
 
 class Library_t{
 
 public:
 	Library_t();
 	virtual ~Library_t();
-	virtual bool AddBook(string name, string author, string isbn, int copies);
-	virtual bool RemoveBook(string isbn);
+	virtual bool AddBook(const string& name, const string& author,
+			const string& isbn, size_t copies);
+	virtual bool RemoveBook(Book_t& book);
 
 	//search for a book in the library. Returns null if there isn't one
-	virtual Book_t* SearchBook(string isbn) const;
+	virtual const Book_t* SearchBook(const string& isbn) const;
 
-	virtual int AddBorrower(string name); //return the ID assigned after adding the borrower
+	virtual int AddBorrower(const string& name); //return the ID assigned after adding the borrower
 	//search for a borrower in the library. Returns null if there isn't one
-	virtual Borrower_t* SearchBorrower(int id) const;
-	virtual bool RemoveBorrower(int id);
+	virtual const Borrower_t* SearchBorrower(int id) const;
+	virtual bool RemoveBorrower(Borrower_t& borrower);
 	virtual void BookReport() const;
 	virtual void BorrowerReport() const;
 
 private:
 	// map for all the books in the library by ISBN
-	map<string, Book_t&> books;
+	BookMap_t books;
 	// map for all the borrowers in the library by ID
-	map<int, Borrower_t&> borrowers;
+	BorrowerMap_t borrowers;
 
 	// Prevent from copying
 	Library_t(const Library_t& library);

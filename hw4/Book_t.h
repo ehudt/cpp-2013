@@ -6,9 +6,15 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
+#include "Borrower_t.h"
+//#include "Library_t.h"
 
 class Borrower_t;
+
+using namespace std;
+
+typedef set<const Borrower_t*> BorrowerSet_t;
+typedef queue<const Borrower_t*> BorrowerQueue_t;
 
 class Book_t {
 	// Support printing operations
@@ -20,17 +26,32 @@ public:
 			size_t num_of_copies);
 	virtual ~Book_t();
 
+	// Operator < (less) for STL set
+	bool operator < (Book_t& rhs) const;
+
 	// Loan the book out to someone, if the book is available. Return true on success.
 	// If the book has no available copies, the function returns false and adds the
 	// borrower to the waiting list.
-	virtual bool Loan(Borrower_t& loan_to);
+	virtual bool Loan(const Borrower_t& loan_to);
 	// Return a book to the library. If the waiting list isn't empty, returning
 	// a book will loan it to the first borrower in the waiting list.
-	virtual bool Return(Borrower_t& return_from);
+	virtual bool Return(const Borrower_t& return_from);
 	// Returns whether there are available copies of the book in the library.
 	virtual bool IsAvailable() const;
 	// Returns whether there are copies of the book which are loaned out
 	virtual bool IsLoaned() const;
+
+	const string& GetAuthor() const {
+		return author;
+	}
+
+	const string& GetIsbn() const {
+		return isbn;
+	}
+
+	const string& GetName() const {
+		return name;
+	}
 
 private:
 	// Disable copying and assigning books
@@ -38,19 +59,19 @@ private:
 	Book_t& operator = (Book_t& rhs);
 
 	// Unique string identifier of a book
-	string isbn;
+	const string isbn;
 	// Book name
-	string name;
+	const string name;
 	// Book author
-	string author;
+	const string author;
 	// # of copies of the book which are available to loan in the library
 	size_t available_copies;
 	// # of copies that are out of the library
 	size_t loaned_copies;
 	// Set of people who loaned the book
-	set<Borrower_t&> loans;
+	BorrowerSet_t loans;
 	// Queue of people who are waiting to loan the book
-	queue<Borrower_t&> waiting_list;
+	BorrowerQueue_t waiting_list;
 };
 
 #endif // _BOOK_T_H
