@@ -20,3 +20,14 @@ Borrower_t.o: Borrower_t.h Book_t.h Borrower_t.cpp
 Book_t.o: Book_t.h Book_t.cpp
 	${CC} ${CFLAGS} -c Book_t.cpp Book_t.h Borrower_t.h
 
+BookTest: BookTest.o Book_t.o Borrower_t.o
+	${CC} ${CFLAGS} BookTest.o Book_t.o Borrower_t.o -o BookTest
+
+BookTest.o: BookTest.cpp Book_t.h Borrower_t.h
+	${CC} ${CFLAGS} -c BookTest.cpp
+
+BorrowerTest: BorrowerTest.o Book_t.o Borrower_t.o
+	${CC} ${CFLAGS} BorrowerTest.o Book_t.o Borrower_t.o -o BorrowerTest
+
+BorrowerTest.o: BorrowerTest.cpp Book_t.h Borrower_t.h
+	${CC} ${CFLAGS} -c BorrowerTest.cpp

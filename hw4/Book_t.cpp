@@ -53,7 +53,6 @@ bool Book_t::Return(const Borrower_t& return_from) {
 	if (!waiting_list.empty()) {
 		Borrower_t* next_loan = const_cast<Borrower_t*>(waiting_list.front());
 		waiting_list.pop();
-		Loan(*next_loan);
 		next_loan->Loan(*this);
 	}
 	return true;
