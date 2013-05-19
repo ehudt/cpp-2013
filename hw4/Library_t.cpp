@@ -58,7 +58,7 @@ bool Library_t::RemoveBook(Book_t& book) {
 	return true;
 }
 
-const Book_t* Library_t::SearchBook(const string& isbn) const {
+Book_t* Library_t::SearchBook(const string& isbn) const {
 	BookMap_t::const_iterator it = books.find(isbn);
 	if (it == books.end()) return 0;
 	return it->second;
@@ -71,7 +71,7 @@ int Library_t::AddBorrower(const string& name) {
 	return id;
 }
 
-const Borrower_t* Library_t::SearchBorrower(int id) const {
+Borrower_t* Library_t::SearchBorrower(int id) const {
 	BorrowerMap_t::const_iterator it = borrowers.find(id);
 	if (it == borrowers.end()) return 0;
 	return it->second;
@@ -88,16 +88,26 @@ bool Library_t::RemoveBorrower(Borrower_t& borrower) {
 }
 
 bool Library_t::LoanBook(Borrower_t& borrower, Book_t& book) const {
-	if (book.IsAvailable()) {
-		book.Loan(borrower);
-		borrower.Loan(book);
-		return true;
+	// Check that the book and borrower exist in the library
+	if (SearchBook(book.GetIsbn()) == 0
+			|| SearchBorrower(borrower.GetId()) == 0) {
+		return false;
 	}
-	book.AddToWaitingList(borrower);
-	return false;
+	if (!book.IsAvailable()) {
+		book.AddToWaitingList(borrower);
+		return false;
+	}
+	book.Loan(borrower);
+	borrower.Loan(book);
+	return true;
 }
 
 bool Library_t::ReturnBook(Borrower_t& borrower, Book_t& book) const {
+	// Check that the book and borrower exist in the library
+	if (SearchBook(book.GetIsbn()) == 0
+			|| SearchBorrower(borrower.GetId()) == 0) {
+		return false;
+	}
 	if (!borrower.Return(book) || !book.Return(borrower)) return false;
 	if (!book.WaitingListEmpty()) {
 		LoanBookToNextOnWaitingList(book);

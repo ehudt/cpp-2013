@@ -2,11 +2,17 @@ CC = g++
 CFLAGS = -Wall -Wextra -g
 BIN_NAME = library_demo
 
-all: main.o Library_t.o Borrower_t.o Book_t.o
+all: program tests
+	
+
+program: main.o Library_t.o Borrower_t.o Book_t.o 
 	${CC} ${CFLAGS} main.o Library_t.o Borrower_t.o Book_t.o -o ${BIN_NAME}
 
+tests: BookTest BorrowerTest LibraryTest
+	
+
 clean:
-	rm -f main.o Library_t.o Borrower_t.o Book_t.o *.gch
+	rm -f main.o Library_t.o Borrower_t.o Book_t.o BookTest.o BorrowerTest.o BookTest BorrowerTest library_demo *.gch
 
 main.o: main.cpp
 	${CC} ${CFLAGS} -c main.cpp
@@ -31,3 +37,9 @@ BorrowerTest: BorrowerTest.o Book_t.o Borrower_t.o
 
 BorrowerTest.o: BorrowerTest.cpp Book_t.h Borrower_t.h
 	${CC} ${CFLAGS} -c BorrowerTest.cpp
+
+LibraryTest: LibraryTest.o Book_t.o Borrower_t.o Library_t.o
+	${CC} ${CFLAGS} LibraryTest.o Book_t.o Borrower_t.o Library_t.o -o LibraryTest
+
+LibraryTest.o: LibraryTest.cpp Book_t.h Borrower_t.h Library_t.h
+	${CC} ${FLAGS} -c LibraryTest.cpp
