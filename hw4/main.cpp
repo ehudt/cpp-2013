@@ -13,6 +13,7 @@ class Borrower_t;
 class Book_t;
 class Library_t;
 
+
 int main(void) {
 	bool cont	= true;			// trigger to stop loop
 	unsigned int c = (unsigned)-1;
@@ -86,7 +87,12 @@ int main(void) {
 				break;
 			}
 			book = library.SearchBook(isbn);
-			success = library.RemoveBook(*book);
+			if (book){
+				success = library.RemoveBook(*book);
+			}
+			else
+				success = false;
+
 			cout << "Removing the book " << (success ? "succeeded." : "failed. ") << endl << endl;
 			break;
 		}
@@ -121,7 +127,11 @@ int main(void) {
 			}
 
 			borrower = library.SearchBorrower(id);
-			success = library.RemoveBorrower(*borrower);
+			if (borrower){
+				success = library.RemoveBorrower(*borrower);
+			}
+			else
+				success = false;
 
 			cout << "Removing the borrower " << (success ? "succeeded." : "failed.") << endl << endl;
 			break;
@@ -139,10 +149,15 @@ int main(void) {
 
 			book = library.SearchBook(isbn);
 			borrower = library.SearchBorrower(id);
-			success = library.LoanBook(*borrower,*book);
 
-			cout << "Loaning the book " << book->GetName() << " to " << borrower->GetName() << (success ? " succeeded." : " failed.");
-			cout << endl << endl;
+			if (borrower && book){
+				success = library.LoanBook(*borrower,*book);
+				cout << "Loaning the book " << book->GetName() << " to " << borrower->GetName() << (success ? " succeeded." : " failed.");
+				cout << endl << endl;
+			}
+			else
+				cout << "Book or borrower not found" << endl << endl;
+
 			break;
 
 
@@ -156,12 +171,17 @@ int main(void) {
 					break;
 				}
 
+
 			book = library.SearchBook(isbn);
 			borrower = library.SearchBorrower(id);
-			success = library.ReturnBook(*borrower, *book);
 
-			cout << "Returning the book " << book->GetName() << " from " << borrower->GetName() << (success ? " succeeded." : " failed.");
-			cout << endl << endl;
+			if (borrower && book){
+						success = library.ReturnBook(*borrower, *book);
+						cout << "Returning the book " << book->GetName() << " from " << borrower->GetName() << (success ? " succeeded." : " failed.");
+						cout << endl << endl;
+						}
+				else
+					cout << "Book or borrower not found" << endl << endl;
 			break;
 
 		case 6:
