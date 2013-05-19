@@ -17,7 +17,7 @@ class Borrower_t {
 
 public:
 	// CTOR using name. ID is assigned automatically.
-	Borrower_t(string name);
+	explicit Borrower_t(string name);
 	virtual ~Borrower_t();
 
 	// Get user ID

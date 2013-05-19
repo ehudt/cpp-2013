@@ -12,7 +12,7 @@ tests: BookTest BorrowerTest LibraryTest
 	
 
 clean:
-	rm -f main.o Library_t.o Borrower_t.o Book_t.o BookTest.o BorrowerTest.o BookTest BorrowerTest LibraryTest ${BIN_NAME} *.gch
+	rm -f main.o Library_t.o Borrower_t.o Book_t.o BookTest.o BorrowerTest.o LibraryTest.o BookTest BorrowerTest LibraryTest ${BIN_NAME} *.gch
 
 main.o: main.cpp
 	${CC} ${CFLAGS} -c main.cpp
