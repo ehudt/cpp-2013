@@ -10,8 +10,10 @@
 
 class StudentImpl : public Observer {
 public:
-	StudentImpl();
-	virtual ~StudentImpl();
+	StudentImpl() {};
+	virtual ~StudentImpl() = 0;
+    virtual const string& GetName()const;
+    virtual void Update(Subject* ChngSubject);
 private:
 	const string& name;
 };
