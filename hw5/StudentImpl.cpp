@@ -5,14 +5,38 @@
  *      Author: ehudt
  */
 
+#include <iostream>
 #include "StudentImpl.h"
+#include "Subject.h"
 
-StudentImpl::StudentImpl() {
-	// TODO Auto-generated constructor stub
+using namespace std;
 
+StudentImpl::StudentImpl(const string& name, Subject* sbj)
+    : name(name),
+      price(-1),
+      Observer(sbj) {
+          sbj->Attach(this);
 }
 
 StudentImpl::~StudentImpl() {
-	// TODO Auto-generated destructor stub
+    sbj->Detach(this);
 }
 
+const string& StudentImpl::GetName() const {
+    return name;
+}
+
+void StudentImpl::Update(Subject* ChngSubject) {
+    if (ChngSubject == sbj) {
+        University& uni = *(University*)ChngSubject;
+        if (uni->GetPrice() != price) {
+            price = uni->GetPrice();
+            cout << this->asString() << " was updated of a new price:"
+                << price << "." << endl;
+        }
+    }
+}
+
+const string& StudentImpl::asString() const {
+    return name;
+}

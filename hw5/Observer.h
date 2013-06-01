@@ -8,7 +8,7 @@ public:
 	virtual			~Observer() {}
     virtual void	Update(Subject* ChngSubject) = 0;
 protected:
-	Observer() : sbj(0) {}
+	Observer(Subject* sbj) : sbj(sbj) {}
 	Subject* sbj;
 };
 
