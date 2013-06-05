@@ -11,7 +11,7 @@ public:
 
 private:
 	static University university;
-	University();
+	University(int iPrice);
 	University(University& uni);
 	void operator=(University& rhs);
 
