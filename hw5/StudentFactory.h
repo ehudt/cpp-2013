@@ -9,7 +9,7 @@ class StudentImpl;
 
 class StudentFactory {
 public:
-	static StudentImpl* Create(const string& type, const string& name);
+	static StudentImpl* Create(const string& type, const string& name, University* subj);
 
 private:
 	StudentFactory();
