@@ -17,6 +17,7 @@ using namespace std;
 
 class StudentImpl;
 class Subject;
+class University;
 
 class Student : public Observer {
 public:
@@ -24,6 +25,7 @@ public:
 	virtual ~Student();
 	virtual void Update(Subject* ChngSubject) const;
 	virtual const string& GetName() const;
+    virtual const string& GetFaculty() const;
 protected:
 	StudentImpl* m_Student;
 };

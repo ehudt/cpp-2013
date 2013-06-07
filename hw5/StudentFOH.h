@@ -5,10 +5,13 @@
 
 class StudentFOH : public StudentImpl {
 public:
-    StudentFOH(const string& name, Subject* sbj) : StudentImpl(name, sbj) {}
+    StudentFOH(const string& name, University* sbj) : StudentImpl(name, sbj) {}
     ~StudentFOH() {}
-};
+    
+    virtual const string& GetFaculty() const;
 
-#include <iostream>
+private:
+    static const string faculty;
+};
 
 #endif // STUDENTFOH_H

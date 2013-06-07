@@ -7,9 +7,10 @@
 
 #include "Student.h"
 #include "StudentImpl.h"
+#include "StudentFactory.h"
 
-Student::Student(const string& faculty, const string& name) {
-	m_Student = StudentFactory::Create(faculty, name);
+Student::Student(const string& faculty, const string& name, University* sbj) {
+	m_Student = StudentFactory::Create(faculty, name, sbj);
 }
 
 Student::~Student() {
@@ -23,4 +24,8 @@ void Student::Update(Subject* ChngSubject) const {
 
 const string& Student::GetName() const {
 	return m_Student->GetName();
+}
+
+const string& Student::GetFaculty() const {
+    return m_Student->GetFaculty();
 }
