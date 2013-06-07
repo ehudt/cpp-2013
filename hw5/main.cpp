@@ -10,6 +10,7 @@
 		if (!cin.good()) {\
 			cin.clear();\
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');\
+			cout << "Bad Input." << endl;\
 			break;\
 		} do{}while(0)
 
