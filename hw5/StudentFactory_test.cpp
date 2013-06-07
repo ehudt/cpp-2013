@@ -12,7 +12,7 @@
 
 void testStudentFactory() {
 	University& uni = University::GetObj();
-	Student* student;
+	StudentImpl* student;
 	student = StudentFactory::Create("FOH", "Arbel", &uni);
 	assert(student != 0);
 	assert(student->GetFaculty() == "FOH");
