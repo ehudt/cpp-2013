@@ -13,7 +13,7 @@ using namespace std;
 
 StudentImpl::StudentImpl(const string& name, University* sbj)
     : name(name),
-      price(-1),
+      price(100),
       uni(sbj) {
     uni->Attach(this);
 }

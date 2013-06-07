@@ -13,7 +13,7 @@ class Subject;
 
 class StudentESF : public StudentImpl {
 public:
-    StudentESF(const string& name, University* sbj) : StudentImpl(name, sbj) {}
+    StudentESF(const string& name, University* sbj) : StudentImpl(name, sbj), cancel_message("") {}
     ~StudentESF() {}
 
     virtual const string& GetFaculty() const;
