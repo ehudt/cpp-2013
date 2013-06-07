@@ -15,13 +15,13 @@ University& University::GetObj() {
 
 size_t University::RaisePrice(size_t newPrice) {
 	price = newPrice;
-	NotifySpecific(PRICE);
+	Notify(PRICE);
 	return price;
 }
 
 void University::CancelLecture(const string& courseName) {
 	lastMassage = courseName;
-	NotifySpecific(LECTURE_CANCELATION);
+	Notify(LECTURE_CANCELATION);
 }
 
 const string& University::GetLastMessage() {
@@ -32,7 +32,11 @@ size_t University::GetPrice() {
 	return price;
 }
 
-void University::NotifySpecific(Notification notification) {
+void University::Notify() {
+	Subject::Notify();
+}
+
+void University::Notify(Notification notification) {
 	if (notification == PRICE){
 		Notify();
 	}

@@ -18,7 +18,8 @@ public:
 	void CancelLecture(const string& courseName);
 	const string& GetLastMessage();
 	size_t GetPrice();
-	virtual void NotifySpecific(Notification notification);
+	virtual void Notify();
+	virtual void Notify(Notification notification);
 
 
 private:
