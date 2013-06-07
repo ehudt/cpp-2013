@@ -21,7 +21,7 @@ void Subject ::Detach (Observer* ob) {
 }
 
 
-void Subject ::Notify () {
+void Subject::Notify() {
 	for (int i = 0; i < m_observers.size(); i++)
 		(m_observers[i])->Update(this);
 }
