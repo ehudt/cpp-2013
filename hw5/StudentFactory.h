@@ -5,11 +5,11 @@
 
 using namespace std;
 
-class Student;
+class StudentImpl;
 
 class StudentFactory {
 public:
-	static Student* Create(const string& type, const string& name);
+	static StudentImpl* Create(const string& type, const string& name);
 
 private:
 	StudentFactory();

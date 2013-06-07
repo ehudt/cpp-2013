@@ -9,8 +9,8 @@
 #include "StudentESF.h"
 #include "StudentFOH.h"
 
-Student* StudentFactory::Create(const string& type, const string& name) {
-	Student* ptrStudent = 0;
+StudentImpl* StudentFactory::Create(const string& type, const string& name) {
+	StudentImpl* ptrStudent = 0;
 	if (type == "ESF")
 		ptrStudent = new StudentESF(name);
 	if (type == "FOH")
