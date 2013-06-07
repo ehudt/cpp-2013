@@ -9,6 +9,7 @@
 
 #include "StudentFactory.h"
 #include "University.h"
+#include "StudentImpl.h"
 
 void testStudentFactory() {
 	University& uni = University::GetObj();
