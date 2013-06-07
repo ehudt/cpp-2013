@@ -1,14 +1,17 @@
-//
-//  StudentESF.h
-//  cpp-2013
-//
-//  Created by Ehud Tamir on 6/1/13.
-//  Copyright (c) 2013 Ehud Tamir. All rights reserved.
-//
+#ifndef STUDENTESF_H
+#define STUDENTESF_H
 
-#ifndef __cpp_2013__StudentESF__
-#define __cpp_2013__StudentESF__
+#include <string>
 
-#include <iostream>
+#include "StudentImpl.h"
 
-#endif /* defined(__cpp_2013__StudentESF__) */
+using namespace std;
+
+class Subject;
+
+class StudentESF : public StudentImpl {
+    StudentESF(const string& name, Subject* sbj) : StudentImpl(name, sbj) {}
+    ~StudentESF() {}
+};
+
+#endif // STUDENTESF_H

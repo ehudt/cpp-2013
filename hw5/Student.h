@@ -9,12 +9,16 @@
 #define STUDENT_H_
 
 #include <string>
+
+#include "Observer.h"
+#include "StudentFactory.h"
+
 using namespace std;
 
 class StudentImpl;
 class Subject;
 
-class Student {
+class Student : public Observer {
 public:
 	Student(const string& faculty, const string& name);
 	virtual ~Student();

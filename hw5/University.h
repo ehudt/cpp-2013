@@ -2,8 +2,9 @@
 #define UNIVERSITY_H_
 
 #include "Subject.h"
+#include "Student.h"
 
-class University : public Subject{
+class University : public Subject {
 public:
 	static University& getObj();
 	int RaisePrice(int newPrice);
