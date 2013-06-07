@@ -11,6 +11,9 @@ public:
     virtual const string& GetFaculty() const;
 
 private:
+    StudentFOH(const StudentFOH& other);
+	StudentFOH& operator=(const StudentFOH rhs);
+
     static const string faculty;
 };
 

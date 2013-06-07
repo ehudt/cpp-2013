@@ -18,6 +18,8 @@ public:
     virtual void Update(Subject* ChngSubject);
 
 private:
+    StudentESF(const StudentESF& other);
+    StudentESF& operator=(const StudentESF rhs);
     string cancel_message;
     static const string faculty;
 };

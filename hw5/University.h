@@ -14,7 +14,7 @@ public:
 	static University& GetObj();
 	size_t RaisePrice(size_t newPrice);
 	void CancelLecture(const string& courseName);
-	const string& GetLastMassage();
+	const string& GetLastMessage();
 	size_t GetPrice();
 	void Notify(Notification notification);
 

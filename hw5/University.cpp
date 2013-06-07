@@ -23,7 +23,7 @@ void University::CancelLecture(const string& courseName) {
 	Notify(LECTURE_CANCELATION);
 }
 
-const string& University::GetLastMassage() {
+const string& University::GetLastMessage() {
 	return lastMassage;
 }
 
