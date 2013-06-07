@@ -38,7 +38,8 @@ void University::Notify(Notification notification) {
 	}
 	else{
 		for (size_t i = 0; i < m_observers.size(); i++){
-			if (m_observers[i].getFaculty() == "ESF")
+			Student* student = dynamic_cast<Student*>(m_observers[i]);
+			if (student->GetFaculty() == "ESF")
 				(m_observers[i])->Update(this);
 		}
 	}
