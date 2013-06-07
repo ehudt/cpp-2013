@@ -21,10 +21,10 @@ public:
 
 private:
 	static University university;
-	University(size_t iPrice, string& firstMessage);
+	University(size_t iPrice, const string& firstMessage);
 	University(University& uni);
 	void operator=(University& rhs);
-	string& lastMassage;
+	string lastMassage;
 	size_t price;
 
 };

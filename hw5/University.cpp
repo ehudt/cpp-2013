@@ -46,7 +46,7 @@ void University::Notify(Notification notification) {
 	}
 }
 
-University::University(size_t iPrice, string& firstMessage) :
+University::University(size_t iPrice, const string& firstMessage) :
 		price(iPrice),
 		lastMassage(firstMessage) {}
 
