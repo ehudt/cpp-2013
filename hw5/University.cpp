@@ -33,11 +33,11 @@ size_t University::getPrice() {
 
 void University::Notify(Notification notification) {
 	if (notification == PRICE){
-		for (int i = 0; i < m_observers.size(); i++)
+		for (size_t i = 0; i < m_observers.size(); i++)
 			(m_observers[i])->Update(this);
 	}
 	else{
-		for (int i = 0; i < m_observers.size(); i++){
+		for (size_t i = 0; i < m_observers.size(); i++){
 			if (m_observers[i].getFaculty() == "ESF")
 				(m_observers[i])->Update(this);
 		}
