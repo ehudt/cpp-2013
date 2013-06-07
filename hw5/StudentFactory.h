@@ -6,6 +6,7 @@
 using namespace std;
 
 class StudentImpl;
+class University;
 
 class StudentFactory {
 public:

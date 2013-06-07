@@ -12,7 +12,7 @@ University& University::getObj() {
 	return university;
 }
 
-int University::RaisePrice(int newPrice) {
+size_t University::RaisePrice(size_t newPrice) {
 	price = newPrice;
 	Notify(PRICE);
 	return price;
@@ -43,5 +43,7 @@ void University::Notify(Notification notification) {
 	}
 }
 
-University::University(int iPrice):price(iPrice){}
+University::University(size_t iPrice, string& firstMessage) :
+		price(iPrice),
+		lastMassage(firstMessage) {}
 

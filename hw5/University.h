@@ -12,7 +12,7 @@ enum Notification {
 class University : public Subject {
 public:
 	static University& getObj();
-	int RaisePrice(int newPrice);
+	size_t RaisePrice(size_t newPrice);
 	void CancelLecture(const string& courseName);
 	const string& getLastMassage();
 	size_t getPrice();
@@ -21,18 +21,13 @@ public:
 
 private:
 	static University university;
-	University(int iPrice);
+	University(size_t iPrice, string& firstMessage);
 	University(University& uni);
 	void operator=(University& rhs);
 	string& lastMassage;
 	size_t price;
 
 };
-
-
-
-
-
 
 
 #endif
