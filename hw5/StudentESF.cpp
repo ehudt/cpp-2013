@@ -11,8 +11,8 @@ void StudentESF::Update(Subject *ChngSubject) {
     if (ChngSubject == uni) {
         if (uni->GetLastMessage() != cancel_message) {
             cancel_message = uni->GetLastMessage();
+            cout << this->asString() << " was updated of a cancelled lecture: "
+                        << cancel_message << "." << endl;
         }
-        cout << this->asString() << " was updated of a cancelled lecture: "
-            << cancel_message << "." << endl;
     }
 }
