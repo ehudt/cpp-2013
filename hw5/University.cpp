@@ -7,7 +7,7 @@
 
 #include "University.h"
 
-University University::university(100, "First Message");
+University University::university(100, "");
 
 University& University::GetObj() {
 	return university;
