@@ -24,9 +24,8 @@ private:
 	University(size_t iPrice, const string& firstMessage);
 	University(University& uni);
 	void operator=(University& rhs);
-	string lastMassage;
 	size_t price;
-
+	string lastMassage;
 };
 
 
