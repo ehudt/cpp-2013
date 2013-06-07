@@ -9,7 +9,6 @@ public:
     virtual void	Update(Subject* ChngSubject) = 0;
 protected:
 	Observer() {}
-	//Subject* sbj;
 };
 
 #endif /* OBSERVER_H_ */

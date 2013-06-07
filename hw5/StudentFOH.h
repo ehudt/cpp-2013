@@ -3,6 +3,9 @@
 
 #include "StudentImpl.h"
 
+//class StudentImpl;
+//class University;
+
 class StudentFOH : public StudentImpl {
 public:
     StudentFOH(const string& name, University* sbj) : StudentImpl(name, sbj) {}

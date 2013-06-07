@@ -8,6 +8,8 @@
 using namespace std;
 
 class Subject;
+//class StudentImpl;
+//class University;
 
 class StudentESF : public StudentImpl {
 public:

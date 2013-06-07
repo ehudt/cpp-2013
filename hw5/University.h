@@ -4,6 +4,8 @@
 #include "Subject.h"
 #include "Student.h"
 
+class Student;
+
 enum Notification {
 	PRICE,
 	LECTURE_CANCELATION

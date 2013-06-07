@@ -11,12 +11,11 @@
 #include <string>
 
 #include "Observer.h"
-#include "StudentFactory.h"
 
 using namespace std;
 
 class StudentImpl;
-class Subject;
+//class Subject;
 class University;
 
 class Student : public Observer {

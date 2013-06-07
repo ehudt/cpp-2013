@@ -14,6 +14,8 @@
 
 using namespace std;
 
+class University;
+
 class Subject;
 
 class StudentImpl : public Observer {
