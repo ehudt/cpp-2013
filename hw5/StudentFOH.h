@@ -7,12 +7,14 @@
 //class University;
 
 class StudentFOH : public StudentImpl {
+	friend class StudentFactory;
 public:
-    StudentFOH(const string& name, University* sbj) : StudentImpl(name, sbj) {}
     ~StudentFOH() {}
     
     virtual const string& GetFaculty() const;
 
+protected:
+    StudentFOH(const string& name, University* sbj) : StudentImpl(name, sbj) {}
 private:
     StudentFOH(const StudentFOH& other);
 	StudentFOH& operator=(const StudentFOH rhs);

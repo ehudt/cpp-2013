@@ -20,7 +20,6 @@ class Subject;
 
 class StudentImpl : public Observer {
 public:
-	StudentImpl(const string& name, University* sbj);
 	virtual ~StudentImpl() = 0;
     virtual const string& GetName() const;
     virtual const string& GetFaculty() const = 0;
@@ -28,6 +27,7 @@ public:
     virtual const string asString() const;
     virtual University* GetUni() const;
 protected:
+    StudentImpl(const string& name, University* sbj);
     University* uni;
 private:
 	const string name;

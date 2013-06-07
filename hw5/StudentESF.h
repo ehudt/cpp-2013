@@ -8,16 +8,20 @@
 using namespace std;
 
 class Subject;
+class StudentFactory;
 //class StudentImpl;
 //class University;
 
 class StudentESF : public StudentImpl {
+	friend class StudentFactory;
 public:
-    StudentESF(const string& name, University* sbj) : StudentImpl(name, sbj), cancel_message("") {}
     ~StudentESF() {}
 
     virtual const string& GetFaculty() const;
     virtual void Update(Subject* ChngSubject);
+
+protected:
+    StudentESF(const string& name, University* sbj) : StudentImpl(name, sbj), cancel_message("") {}
 
 private:
     StudentESF(const StudentESF& other);
