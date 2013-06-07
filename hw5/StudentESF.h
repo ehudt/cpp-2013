@@ -15,7 +15,7 @@ class StudentFactory;
 class StudentESF : public StudentImpl {
 	friend class StudentFactory;
 public:
-    ~StudentESF() {}
+    virtual ~StudentESF() {}
 
     virtual const string& GetFaculty() const;
     virtual void Update(Subject* ChngSubject);

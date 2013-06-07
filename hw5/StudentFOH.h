@@ -9,7 +9,7 @@
 class StudentFOH : public StudentImpl {
 	friend class StudentFactory;
 public:
-    ~StudentFOH() {}
+    virtual ~StudentFOH() {}
     
     virtual const string& GetFaculty() const;
 

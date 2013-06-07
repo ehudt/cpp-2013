@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-
 class Subject {
 public:
 	virtual ~Subject() {}
