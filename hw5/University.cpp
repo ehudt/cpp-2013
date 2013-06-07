@@ -24,11 +24,11 @@ void University::CancelLecture(const string& courseName) {
 	Notify(LECTURE_CANCELATION);
 }
 
-const string& University::GetLastMessage() {
+const string& University::GetLastMessage() const {
 	return lastMassage;
 }
 
-size_t University::GetPrice() {
+size_t University::GetPrice() const {
 	return price;
 }
 
