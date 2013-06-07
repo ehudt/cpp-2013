@@ -32,6 +32,10 @@ size_t University::GetPrice() {
 	return price;
 }
 
+void University::Notify() {
+	Subject::Notify();
+}
+
 void University::Notify(Notification notification) {
 	if (notification == PRICE){
 		Notify();
