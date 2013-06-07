@@ -19,6 +19,7 @@ size_t University::RaisePrice(size_t newPrice) {
 }
 
 void University::CancelLecture(const string& courseName) {
+	lastMassage = courseName;
 	Notify(LECTURE_CANCELATION);
 }
 
