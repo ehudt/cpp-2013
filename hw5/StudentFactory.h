@@ -11,10 +11,11 @@ class StudentFactory {
 public:
 	static Student* Create(const string& type, const string& name);
 
-public:
+private:
 	StudentFactory();
 	StudentFactory(const StudentFactory& factory);
 	StudentFactory& operator=(const StudentFactory& rhs);
+	~StudentFactory();
 };
 
 #endif
