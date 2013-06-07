@@ -4,8 +4,8 @@ BIN_NAME = University_demo
 
 all: program tests
 	
-program: main.o University.o StudentFactory.o Student.o StudentImpl.o Subject.o Observer.o
-	${CC} ${CFLAGS}  main.o University.o StudentFactory.o Student.o StudentImpl.o Subject.o Observer.o -o ${BIN_NAME}
+program: main.o University.o StudentFactory.o Student.o StudentImpl.o Subject.o
+	${CC} ${CFLAGS}  main.o University.o StudentFactory.o Student.o StudentImpl.o Subject.o -o ${BIN_NAME}
 
 
 clean:
