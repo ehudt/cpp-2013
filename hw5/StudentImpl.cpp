@@ -18,9 +18,7 @@ StudentImpl::StudentImpl(const string& name, University* sbj)
     //uni->Attach(this);
 }
 
-StudentImpl::~StudentImpl() {
-    uni->Detach(this);
-}
+StudentImpl::~StudentImpl() {}
 
 const string& StudentImpl::GetName() const {
     return name;
@@ -38,4 +36,8 @@ void StudentImpl::Update(Subject* ChngSubject) {
 
 const string StudentImpl::asString() const {
     return name + " (" + GetFaculty() + ")";
+}
+
+University* StudentImpl::GetUni() const {
+	return uni;
 }

@@ -26,6 +26,7 @@ public:
     virtual const string& GetFaculty() const = 0;
     virtual void Update(Subject* ChngSubject);
     virtual const string asString() const;
+    virtual University* GetUni() const;
 protected:
     University* uni;
 private:

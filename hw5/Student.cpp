@@ -11,10 +11,11 @@
 
 Student::Student(const string& faculty, const string& name, University* sbj) {
 	m_Student = StudentFactory::Create(faculty, name, sbj);
-	sbj->Attach(this);
+	m_Student->GetUni()->Attach(this);
 }
 
 Student::~Student() {
+	m_Student->GetUni()->Detach(this);
 	delete m_Student;
 	m_Student = 0;
 }
