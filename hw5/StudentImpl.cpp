@@ -12,9 +12,9 @@
 using namespace std;
 
 StudentImpl::StudentImpl(const string& name, University* sbj)
-    : name(name),
-      price(100),
-      uni(sbj) {
+    : uni(sbj),
+      name(name),
+      price(100) {
     //uni->Attach(this);
 }
 

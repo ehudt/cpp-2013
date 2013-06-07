@@ -6,8 +6,8 @@
 #include "Student.h"
 
 // Macro for token input
-#define GetToken(c) cin >> c;\
-	do {\
+#define GetToken(c) do {\
+		cin >> c;\
 		if (!cin.good()) {\
 			cin.clear();\
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');\
@@ -22,7 +22,7 @@ int main() {
 	const string faculty[] = {"FOH", "ESF", ""};
 
 	bool cont = true;
-	unsigned int c = 0;
+	unsigned int c = (unsigned)-1;
 	while (cont) {
 		cout    << "    Welcome to Greendale Community college!" << endl
 				<< "    What would you like to do?" << endl
@@ -45,7 +45,6 @@ int main() {
 			case 2:
 				cout << "Enter student name: ";
 				GetToken(name);
-				cout << name;
 				student = new Student(faculty[c - 1], name, &university);
 				students.push_back(student);
 				break;
@@ -56,7 +55,8 @@ int main() {
 				break;
 			case 4:
 				cout << "Enter class cancellation message: ";
-				GetToken(cancel_message);
+				cin.get();
+				getline(cin, cancel_message);
 				university.CancelLecture(cancel_message);
 				break;
 			default:
