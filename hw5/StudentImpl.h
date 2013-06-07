@@ -29,7 +29,7 @@ public:
 protected:
     University* uni;
 private:
-	const string& name;
+	const string name;
     size_t price;
 };
 
