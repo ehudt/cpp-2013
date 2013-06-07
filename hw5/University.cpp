@@ -8,7 +8,7 @@
 #include "University.h"
 
 
-University& University::getObj() {
+University& University::GetObj() {
 	return university;
 }
 
@@ -23,11 +23,11 @@ void University::CancelLecture(const string& courseName) {
 	Notify(LECTURE_CANCELATION);
 }
 
-const string& University::getLastMassage() {
+const string& University::GetLastMassage() {
 	return lastMassage;
 }
 
-size_t University::getPrice() {
+size_t University::GetPrice() {
 	return price;
 }
 
