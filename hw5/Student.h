@@ -23,7 +23,7 @@ class Student : public Observer {
 public:
 	Student(const string& faculty, const string& name, University* sbj);
 	virtual ~Student();
-	virtual void Update(Subject* ChngSubject) const;
+	virtual void Update(Subject* ChngSubject);
 	virtual const string& GetName() const;
     virtual const string& GetFaculty() const;
 protected:

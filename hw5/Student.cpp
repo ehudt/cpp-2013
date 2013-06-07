@@ -18,7 +18,7 @@ Student::~Student() {
 	m_Student = 0;
 }
 
-void Student::Update(Subject* ChngSubject) const {
+void Student::Update(Subject* ChngSubject) {
 	m_Student->Update(ChngSubject);
 }
 
