@@ -16,8 +16,7 @@ public:
     virtual void Notify();
 protected:
 	Subject() {}
-private:
-    vector<Observer*> m_observers;
+	vector<Observer*> m_observers;
 };
 
 #endif /* SUBJECT_H_ */
