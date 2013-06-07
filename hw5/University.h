@@ -11,11 +11,11 @@ enum Notification {
 
 class University : public Subject {
 public:
-	static University& getObj();
+	static University& GetObj();
 	size_t RaisePrice(size_t newPrice);
 	void CancelLecture(const string& courseName);
-	const string& getLastMassage();
-	size_t getPrice();
+	const string& GetLastMassage();
+	size_t GetPrice();
 	void Notify(Notification notification);
 
 

@@ -6,7 +6,7 @@ const string& StudentESF::GetFaculty() const {
     return faculty;
 }
 
-void StudentESF::Update(<#Subject *ChngSubject#>) {
+void StudentESF::Update(Subject *ChngSubject) {
     StudentImpl::Update(ChngSubject);
     if (ChngSubject == uni) {
         if (uni->GetLastMessage() != cancel_message) {

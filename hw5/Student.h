@@ -21,13 +21,16 @@ class University;
 
 class Student : public Observer {
 public:
-	Student(const string& faculty, const string& name);
+	Student(const string& faculty, const string& name, University* sbj);
 	virtual ~Student();
 	virtual void Update(Subject* ChngSubject) const;
 	virtual const string& GetName() const;
     virtual const string& GetFaculty() const;
 protected:
 	StudentImpl* m_Student;
+private:
+	Student(const Student& other);
+	Student& operator = (const Student& rhs);
 };
 
 #endif /* STUDENT_H_ */
