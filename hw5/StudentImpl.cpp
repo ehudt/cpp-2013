@@ -37,5 +37,5 @@ void StudentImpl::Update(Subject* ChngSubject) {
 }
 
 const string StudentImpl::asString() const {
-    return name + "(" + GetFaculty() + ")";
+    return name + " (" + GetFaculty() + ")";
 }

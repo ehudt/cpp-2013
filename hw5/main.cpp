@@ -45,6 +45,7 @@ int main() {
 			case 2:
 				cout << "Enter student name: ";
 				GetToken(name);
+				cout << name;
 				student = new Student(faculty[c - 1], name, &university);
 				students.push_back(student);
 				break;
