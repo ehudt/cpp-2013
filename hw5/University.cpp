@@ -34,7 +34,7 @@ size_t University::GetPrice() {
 
 void University::Notify(Notification notification) {
 	if (notification == PRICE){
-		Subject::Notify();
+		Notify();
 	}
 	else{
 		for (size_t i = 0; i < m_observers.size(); i++){
