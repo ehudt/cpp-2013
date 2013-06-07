@@ -36,8 +36,8 @@ StudentESF.o: StudentESF.h StudentESF.cpp StudentImpl.h
 StudentFOH.o: StudentFOH.h StudentFOH.cpp StudentImpl.h
 	${CC} ${CFLAGS} -c StudentFOH.h StudentFOH.cpp
 
-StudentFactory_test: StudentFactory_test.o StudentFactory.o StudentESF.o StudentFOH.o University.o StudentImpl.o
-	${CC} ${CFLAGS} StudentFactory_test.o StudentFactory.o StudentESF.o StudentFOH.o University.o StudentImpl.o -o StudentFactory_test
+StudentFactory_test: StudentFactory_test.o StudentFactory.o StudentESF.o StudentFOH.o University.o StudentImpl.o Subject.o
+	${CC} ${CFLAGS} StudentFactory_test.o StudentFactory.o StudentESF.o StudentFOH.o University.o StudentImpl.o Subject.o -o StudentFactory_test
 
 StudentFactory_test.o: StudentFactory_test.cpp StudentFactory.h University.h
 	${CC} ${CFLAGS} -c StudentFactory_test.cpp
