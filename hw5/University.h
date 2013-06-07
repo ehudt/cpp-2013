@@ -7,7 +7,7 @@ class University : public Subject{
 public:
 	static University& getObj();
 	int RaisePrice(int newPrice);
-	void CancelLecture(string& courseName);
+	void CancelLecture(const string& courseName);
 
 private:
 	static University university;

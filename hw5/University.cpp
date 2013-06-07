@@ -18,7 +18,7 @@ int University::RaisePrice(int newPrice) {
 	return price;
 }
 
-void University::CancelLecture(string& courseName) {
+void University::CancelLecture(const string& courseName) {
 	Notify(courseName);//TODO
 }
 
