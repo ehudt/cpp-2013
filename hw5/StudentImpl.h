@@ -26,7 +26,7 @@ public:
     virtual const string asString() const;
 private:
 	const string& name;
-    int price;
+    size_t price;
     University* uni;
 };
 
