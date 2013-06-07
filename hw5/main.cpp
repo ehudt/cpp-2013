@@ -6,13 +6,12 @@
 #include "Student.h"
 
 // Macro for token input
-#define GetToken(c) do {\
-		cin >> c;\
+#define GetToken(c) cin >> c;\
 		if (!cin.good()) {\
 			cin.clear();\
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');\
-			break;}\
-	} while(0)
+			break;\
+		} do{}while(0)
 
 using namespace std;
 

@@ -14,9 +14,7 @@ using namespace std;
 StudentImpl::StudentImpl(const string& name, University* sbj)
     : uni(sbj),
       name(name),
-      price(100) {
-    //uni->Attach(this);
-}
+      price(100) {}
 
 StudentImpl::~StudentImpl() {}
 
