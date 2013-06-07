@@ -15,7 +15,7 @@ StudentImpl::StudentImpl(const string& name, University* sbj)
     : name(name),
       price(100),
       uni(sbj) {
-    uni->Attach(this);
+    //uni->Attach(this);
 }
 
 StudentImpl::~StudentImpl() {

@@ -11,6 +11,7 @@
 
 Student::Student(const string& faculty, const string& name, University* sbj) {
 	m_Student = StudentFactory::Create(faculty, name, sbj);
+	sbj->Attach(this);
 }
 
 Student::~Student() {

@@ -23,7 +23,7 @@ Subject.o: Subject.h Subject.cpp Observer.h
 Observer.o: Observer.h
 	${CC} ${CFLAGS} -c Observer.h 
 		
-Student.o: Student.h Student.cpp Observer.h StudentFactory.h
+Student.o: Student.h Student.cpp Observer.h StudentFactory.h University.h
 	${CC} ${CFLAGS} -c Student.h Student.cpp 
 
 StudentImpl.o: StudentImpl.h StudentImpl.cpp Observer.h University.h
