@@ -3,6 +3,9 @@
 
 #include <string>
 
+#include "StudentESF.h"
+#include "StudentFOH.h"
+
 using namespace std;
 
 class StudentImpl;

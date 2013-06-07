@@ -6,8 +6,6 @@
  */
 
 #include "StudentFactory.h"
-#include "StudentESF.h"
-#include "StudentFOH.h"
 
 StudentImpl* StudentFactory::Create(const string& type, const string& name, University* subj) {
 	StudentImpl* ptrStudent = 0;
