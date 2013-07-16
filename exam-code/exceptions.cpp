@@ -72,6 +72,6 @@ int main(void) {
 	//f();
 	prev = set_terminate(zubi);
 	throw "kaki";
-	//g();
+	g();
 	return 0;
 }
