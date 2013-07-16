@@ -24,9 +24,9 @@ int main(void) {
 	cout << pp.GetP() << endl;
 	cout << static_cast<int *>(pp) << ", " << static_cast<int>(pp) << endl;
 	cout << pp.operator int *() << endl;
+	//cout << int*(pp) << endl; //illegal
 	string s1("ehud");
 	string s2("roi");
-	cout << s1.operator char *() << ", " << s2.operator char *() << endl;
 	//cout << s1 - s2 << endl;
 	return 0;
 }
