@@ -12,7 +12,7 @@ public:
 	virtual void foo() = 0;
 };
 
-void A::foo()  {print("Base::foo()");}
+//void A::foo()  {print("Base::foo()");}
 
 class B : public A {
 public:

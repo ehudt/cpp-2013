@@ -36,7 +36,7 @@ void timtum() {
 }
 
 void func(int i) { cout << "int" << endl;}
-void func(char);
+//void func(char);
 template <class T> class X
 {
 public:
@@ -45,8 +45,8 @@ public:
 void func(char c) {cout << "char" << endl;}
 
 int main(void) {
-	//X<char> x;
-	//x.foo('a');
-	timtum();
+	X<char> x;
+	x.foo('a');
+	//timtum();
 	return 0;
 }

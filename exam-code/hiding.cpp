@@ -29,12 +29,13 @@ void func(Base& obj) {
 
 class Base2 {
 public:
-	virtual void func(float f) { cout << "Base2 func" << endl; }
+	virtual void func(double f) { cout << "Base2 func" << endl; }
 };
 
 class Derived : public Base2 {
 public:
-	virtual void func(string i) { cout << "Derived func" << endl; }
+	using Base2::func;
+	virtual void func(int i) { cout << "Derived func" << endl; }
 	//void func(float f) { Base2::func(f); }
 };
 

@@ -20,3 +20,8 @@ int main(void ) {
 	func<long long>();
 	return 0;
 }
+
+template <class T>
+T min (const T t1, const T t2) {
+	return (t1 < t2) ? t1 : t2;
+}

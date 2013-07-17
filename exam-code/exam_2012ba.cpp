@@ -13,6 +13,13 @@ protected:
 	}
 };
 
+class B: public NoHeap {};
+
+void ff() {
+	B* b = new B;
+	delete b;
+}
+
 class NoStack {
 public:
 	void Destroy() {
