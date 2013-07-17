@@ -49,6 +49,11 @@ void func( Base* obj) {
 int main(void) {
 	Drv d;
 	func(&d);
+	unsigned ** p = (unsigned **)&d;
+	cout << *p << (*p + 1) << (*p + 2) << (*p + 3)  << endl;
+	Base b;
+	p = (unsigned **)&b;
+	cout << *p << (*p + 1) << (*p + 2) << (*p + 3)  << endl;
 	//Base a;
 	//func(a);
 	/*B b;

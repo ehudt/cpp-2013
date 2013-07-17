@@ -19,10 +19,10 @@ public:
 };
 
 void func(Base& obj) {
-	print (typeid(obj).name());
+	//print (typeid(obj).name());
 	obj.foo();
-	Drv& d = *(dynamic_cast<Drv*>(&obj));
-	d.foo();
+	//Drv& d = *(dynamic_cast<Drv*>(&obj));
+	//d.foo();
 }
 
 
@@ -45,7 +45,8 @@ void timtum() {
 
 int main(void) {
 	Drv d;
+	d.foo();
 	func(d);
-	timtum();
+	//timtum();
 	return 0;
 }
