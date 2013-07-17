@@ -28,11 +28,11 @@ void timtum() {
 	Point p = (x + r * cos(a), y + r * sin(a));
 	Derived d;
 	d.func(3.14);
-	try {
+	/*try {
 		throw;
 	} catch (...) {
 		cout << "caught" << endl;
-	}
+	}*/
 }
 
 void func(int i) { cout << "int" << endl;}
@@ -45,7 +45,8 @@ public:
 void func(char c) {cout << "char" << endl;}
 
 int main(void) {
-	X<char> x;
-	x.foo('a');
+	//X<char> x;
+	//x.foo('a');
+	timtum();
 	return 0;
 }

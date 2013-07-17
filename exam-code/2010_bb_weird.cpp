@@ -41,7 +41,7 @@ public:
 	void write() { print("Drv Write"); }
 };
 
-void printFile(File& fl) {
+void printFile(File fl) {
 	cout << endl;
 	fl.write();
 	DrvFile* dPtr = dynamic_cast<DrvFile*>(&fl);

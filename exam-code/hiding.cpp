@@ -29,12 +29,12 @@ void func(Base& obj) {
 
 class Base2 {
 public:
-	void func(float f) { cout << "Base2 func" << endl; }
+	virtual void func(float f) { cout << "Base2 func" << endl; }
 };
 
 class Derived : public Base2 {
 public:
-	void func(int i) { cout << "Derived func" << endl; }
+	virtual void func(string i) { cout << "Derived func" << endl; }
 	//void func(float f) { Base2::func(f); }
 };
 
@@ -44,9 +44,9 @@ void timtum() {
 }
 
 int main(void) {
-	Drv d;
-	d.foo();
-	func(d);
-	//timtum();
+	//Drv d;
+	//d.foo();
+	//func(d);
+	timtum();
 	return 0;
 }

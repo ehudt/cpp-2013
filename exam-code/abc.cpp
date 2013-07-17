@@ -20,5 +20,7 @@ public:
 int main(void) {
 	A a;
 	a.foo();
+	//ABC abc;
+	//abc.foo();
 	return 0;
 }
